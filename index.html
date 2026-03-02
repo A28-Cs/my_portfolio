@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Ismail | Jr AI Engineer – Portfolio</title>
+    <meta name="description"
+        content="Ahmed Ismail Abduallah – Junior AI Engineer specialized in Deep Learning, End-to-End Model Development, and MLOps. Explore my projects, skills, and experience.">
+    <meta name="keywords"
+        content="Ahmed Ismail, AI Engineer, Deep Learning, MLOps, Portfolio, Machine Learning, Computer Vision, NLP">
+    <meta name="author" content="Ahmed Ismail Abduallah">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-ring"></div>
+            <div class="loader-text">
+                <span data-char="A">A</span><span data-char="H">H</span><span data-char="M">M</span><span
+                    data-char="E">E</span><span data-char="D">D</span>
+                <span class="loader-dot">.</span>
+                <span data-char="I">I</span><span data-char="S">S</span><span data-char="M">M</span><span
+                    data-char="A">A</span><span data-char="I">I</span><span data-char="L">L</span>
+            </div>
+            <div class="loader-bar">
+                <div class="loader-bar-fill" id="loaderBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-bracket">&lt;</span>
+                <span class="logo-text">AI</span>
+                <span class="logo-bracket">/&gt;</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" class="nav-link active" data-section="hero">Home</a></li>
+                <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+                <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+                <li><a href="#experience" class="nav-link" data-section="experience">Experience</a></li>
+                <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+                <li><a href="#education" class="nav-link" data-section="education">Education</a></li>
+                <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-grid"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge animate-on-scroll">
+                    <span class="badge-dot"></span>
+                    Available for Opportunities
+                </div>
+                <h1 class="hero-title animate-on-scroll">
+                    <span class="hero-greeting">Hello, I'm</span>
+                    <span class="hero-name">
+                        <span class="name-word" data-text="Ahmed">Ahmed</span>
+                        <span class="name-word" data-text="Ismail">Ismail</span>
+                    </span>
+                    <span class="hero-role">
+                        <span class="role-prefix">Jr.</span>
+                        <span class="role-typed" id="typedRole"></span>
+                        <span class="typed-cursor">|</span>
+                    </span>
+                </h1>
+                <p class="hero-description animate-on-scroll">
+                    Specialized in <strong>Deep Learning</strong>, <strong>End-to-End Model Development</strong>,
+                    and <strong>MLOps</strong>. Building scalable, production-ready AI systems that create measurable
+                    impact.
+                </p>
+                <div class="hero-actions animate-on-scroll">
+                    <a href="#projects" class="btn btn-primary">
+                        <span>View Projects</span>
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                    <a href="assets/Ahmed_Ismail_CV.pdf" download="Ahmed_Ismail_CV.pdf" class="btn btn-secondary">
+                        <span>Download CV</span>
+                        <i data-lucide="download"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span>Get in Touch</span>
+                        <i data-lucide="mail"></i>
+                    </a>
+                </div>
+                <div class="hero-stats animate-on-scroll">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="3">0</span><span class="stat-plus">+</span>
+                        <span class="stat-label">AI Projects</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="2">0</span><span class="stat-plus">+</span>
+                        <span class="stat-label">Internships</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="10">0</span><span class="stat-plus">+</span>
+                        <span class="stat-label">Technologies</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual animate-on-scroll">
+                <div class="hero-image-wrapper">
+                    <div class="hero-image-ring"></div>
+                    <div class="hero-image-ring ring-2"></div>
+                    <div class="hero-image-container">
+                        <img src="assets/profile.png" alt="Ahmed Ismail – AI Engineer" class="hero-image"
+                            id="heroImage">
+                    </div>
+                    <div class="floating-badge badge-tf">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
+                            alt="TensorFlow" width="24">
+                    </div>
+                    <div class="floating-badge badge-python">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                            alt="Python" width="24">
+                    </div>
+                    <div class="floating-badge badge-azure">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"
+                            alt="Azure" width="24">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator" id="scrollIndicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">&lt;about&gt;</span>
+                <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-text animate-on-scroll">
+                    <p class="about-intro">
+                        I'm a <strong>Junior AI Engineer</strong> from <strong>Sharkia, Egypt</strong>,
+                        passionate about building intelligent systems that solve real-world problems.
+                    </p>
+                    <p>
+                        I own the full AI lifecycle — from problem framing and data strategy to modeling, optimization,
+                        deployment, and iteration.
+                    </p>
+                    <p>
+                        I'm experienced in experiment tracking and model lifecycle management using MLflow,
+                        and I'm focused on delivering scalable AI systems that create measurable impact.
+                    </p>
+                    <div class="about-info-grid">
+                        <div class="info-item">
+                            <i data-lucide="map-pin"></i>
+                            <div>
+                                <span class="info-label">Location</span>
+                                <span class="info-value">Sharkia, Egypt</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="graduation-cap"></i>
+                            <div>
+                                <span class="info-label">Degree</span>
+                                <span class="info-value">B.Tech in Computer Science</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="briefcase"></i>
+                            <div>
+                                <span class="info-label">Focus</span>
+                                <span class="info-value">AI & Deep Learning</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="mail"></i>
+                            <div>
+                                <span class="info-label">Email</span>
+                                <span class="info-value">ahmed28cs@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 32px;">
+                        <a href="assets/Ahmed_Ismail_CV.pdf" download="Ahmed_Ismail_CV.pdf" class="btn btn-primary">
+                            <span>Download CV</span>
+                            <i data-lucide="download"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="about-visual animate-on-scroll">
+                    <div class="code-window">
+                        <div class="code-header">
+                            <div class="code-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <span class="code-title">ahmed_profile.py</span>
+                        </div>
+                        <pre class="code-body"><code><span class="code-keyword">class</span> <span class="code-class">AhmedIsmail</span>:
+    <span class="code-keyword">def</span> <span class="code-func">__init__</span>(<span class="code-param">self</span>):
+        <span class="code-param">self</span>.name = <span class="code-string">"Ahmed Ismail"</span>
+        <span class="code-param">self</span>.role = <span class="code-string">"Jr. AI Engineer"</span>
+        <span class="code-param">self</span>.location = <span class="code-string">"Egypt"</span>
+        <span class="code-param">self</span>.skills = [
+            <span class="code-string">"Deep Learning"</span>,
+            <span class="code-string">"Computer Vision"</span>,
+            <span class="code-string">"NLP"</span>,
+            <span class="code-string">"MLOps"</span>,
+        ]
+        <span class="code-param">self</span>.passionate = <span class="code-bool">True</span>
+
+    <span class="code-keyword">def</span> <span class="code-func">build_ai</span>(<span class="code-param">self</span>):
+        <span class="code-keyword">return</span> <span class="code-string">"🚀 Impact!"</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section skills" id="skills">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">&lt;skills&gt;</span>
+                <h2 class="section-title">Tech <span class="gradient-text">Stack</span></h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-categories">
+                <!-- Programming -->
+                <div class="skill-category animate-on-scroll">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i data-lucide="code-2"></i>
+                        </div>
+                        <h3>Programming</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-chip" data-level="90">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                                alt="Python" width="20">
+                            <span>Python</span>
+                            <div class="chip-glow"></div>
+                        </div>
+                        <div class="skill-chip" data-level="75">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                                alt="SQL" width="20">
+                            <span>SQL</span>
+                            <div class="chip-glow"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Machine Learning -->
+                <div class="skill-category animate-on-scroll">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i data-lucide="brain"></i>
+                        </div>
+                        <h3>Machine Learning</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-chip" data-level="85">
+                            <i data-lucide="trending-up" class="chip-icon"></i>
+                            <span>Supervised Learning</span>
+                        </div>
+                        <div class="skill-chip" data-level="80">
+                            <i data-lucide="git-branch" class="chip-icon"></i>
+                            <span>Unsupervised Learning</span>
+                        </div>
+                        <div class="skill-chip" data-level="85">
+                            <i data-lucide="bar-chart-3" class="chip-icon"></i>
+                            <span>Model Evaluation</span>
+                        </div>
+                        <div class="skill-chip" data-level="80">
+                            <i data-lucide="settings" class="chip-icon"></i>
+                            <span>Optimization</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Deep Learning -->
+                <div class="skill-category animate-on-scroll">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i data-lucide="layers"></i>
+                        </div>
+                        <h3>Deep Learning</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-chip" data-level="85">
+                            <i data-lucide="scan" class="chip-icon"></i>
+                            <span>CNNs</span>
+                        </div>
+                        <div class="skill-chip" data-level="80">
+                            <i data-lucide="repeat" class="chip-icon"></i>
+                            <span>RNNs</span>
+                        </div>
+                        <div class="skill-chip" data-level="80">
+                            <i data-lucide="zap" class="chip-icon"></i>
+                            <span>Transformers</span>
+                        </div>
+                        <div class="skill-chip" data-level="90">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
+                                alt="TF" width="20">
+                            <span>TensorFlow</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Data Science -->
+                <div class="skill-category animate-on-scroll">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i data-lucide="database"></i>
+                        </div>
+                        <h3>Data Science</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-chip" data-level="90">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg"
+                                alt="NumPy" width="20">
+                            <span>NumPy</span>
+                        </div>
+                        <div class="skill-chip" data-level="90">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"
+                                alt="Pandas" width="20">
+                            <span>Pandas</span>
+                        </div>
+                        <div class="skill-chip" data-level="85">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg"
+                                alt="Matplotlib" width="20">
+                            <span>Matplotlib</span>
+                        </div>
+                        <div class="skill-chip" data-level="85">
+                            <i data-lucide="flask-conical" class="chip-icon"></i>
+                            <span>Scikit-learn</span>
+                        </div>
+                        <div class="skill-chip" data-level="85">
+                            <i data-lucide="search" class="chip-icon"></i>
+                            <span>EDA & Feature Eng.</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- MLOps -->
+                <div class="skill-category animate-on-scroll">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i data-lucide="rocket"></i>
+                        </div>
+                        <h3>MLOps</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-chip" data-level="80">
+                            <i data-lucide="flask-conical" class="chip-icon"></i>
+                            <span>MLflow</span>
+                        </div>
+                        <div class="skill-chip" data-level="75">
+                            <i data-lucide="smile" class="chip-icon"></i>
+                            <span>Hugging Face</span>
+                        </div>
+                        <div class="skill-chip" data-level="80">
+                            <i data-lucide="upload-cloud" class="chip-icon"></i>
+                            <span>Model Deployment</span>
+                        </div>
+                        <div class="skill-chip" data-level="75">
+                            <i data-lucide="activity" class="chip-icon"></i>
+                            <span>Monitoring</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cloud -->
+                <div class="skill-category animate-on-scroll">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i data-lucide="cloud"></i>
+                        </div>
+                        <h3>Cloud</h3>
+                    </div>
+                    <div class="skill-items">
+                        <div class="skill-chip" data-level="75">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg"
+                                alt="Azure" width="20">
+                            <span>Azure AI Fundamentals</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section experience" id="experience">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">&lt;experience&gt;</span>
+                <h2 class="section-title">Professional <span class="gradient-text">Experience</span></h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="timeline-title-group">
+                                <h3>Machine Learning Engineering Intern</h3>
+                                <span class="timeline-company">Digital Egypt Pioneers Initiative (DEPI)</span>
+                            </div>
+                            <span class="timeline-date">
+                                <i data-lucide="calendar"></i>
+                                Jan 2026 – Present
+                            </span>
+                        </div>
+                        <ul class="timeline-details">
+                            <li>Designed and implemented end-to-end AI pipelines from preprocessing to deployment</li>
+                            <li>Developed deep learning models for Computer Vision and NLP applications</li>
+                            <li>Applied model evaluation, hyperparameter tuning, and optimization techniques</li>
+                            <li>Managed experiments and model tracking using MLflow</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span class="tag">Deep Learning</span>
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">NLP</span>
+                            <span class="tag">MLflow</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div class="timeline-title-group">
+                                <h3>Data Science Intern</h3>
+                                <span class="timeline-company">almentor</span>
+                            </div>
+                            <span class="timeline-date">
+                                <i data-lucide="calendar"></i>
+                                Jun 2025 – Dec 2025
+                            </span>
+                        </div>
+                        <ul class="timeline-details">
+                            <li>Conducted exploratory data analysis and built predictive machine learning models</li>
+                            <li>Applied statistical analysis and feature engineering to improve performance</li>
+                            <li>Delivered structured insights using data visualization and reporting techniques</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span class="tag">Data Science</span>
+                            <span class="tag">EDA</span>
+                            <span class="tag">Feature Eng.</span>
+                            <span class="tag">Visualization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects" id="projects">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">&lt;projects&gt;</span>
+                <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="projects-grid">
+                <!-- Project 1: Tree Clinic -->
+                <div class="project-card animate-on-scroll" data-tilt>
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i data-lucide="tree-pine"></i>
+                        </div>
+                        <div class="project-links">
+                            <span class="project-status live">
+                                <span class="status-dot"></span>
+                                Live
+                            </span>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Tree Clinic</h3>
+                    <p class="project-date">Aug 2025 – Present · Zagazig University</p>
+                    <p class="project-description">
+                        Smart mobile application that detects tree diseases using leaf images and AI models.
+                        Identifies diseases, recommends treatments, and connects to an integrated marketplace
+                        with an intelligent agricultural assistant.
+                    </p>
+                    <div class="project-tech">
+                        <span>AI/ML</span>
+                        <span>Computer Vision</span>
+                        <span>Mobile App</span>
+                        <span>Marketplace</span>
+                    </div>
+                    <div class="project-features">
+                        <div class="feature">
+                            <i data-lucide="scan-eye"></i>
+                            <span>Disease Detection</span>
+                        </div>
+                        <div class="feature">
+                            <i data-lucide="pill"></i>
+                            <span>Treatment Recommendations</span>
+                        </div>
+                        <div class="feature">
+                            <i data-lucide="bot"></i>
+                            <span>AI Assistant</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Exo AI -->
+                <div class="project-card animate-on-scroll" data-tilt>
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i data-lucide="orbit"></i>
+                        </div>
+                        <div class="project-links">
+                            <span class="project-status completed">
+                                <span class="status-dot"></span>
+                                Completed
+                            </span>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Exo AI</h3>
+                    <p class="project-date">Nov 2025 · Zagazig University</p>
+                    <p class="project-description">
+                        AI-powered platform automating exoplanet classification using NASA's Kepler, K2,
+                        and TESS datasets. Integrated Python ML models with .NET 9 API and Flutter web
+                        interface for an end-to-end solution.
+                    </p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>.NET 9</span>
+                        <span>Flutter</span>
+                        <span>NASA Data</span>
+                    </div>
+                    <div class="project-features">
+                        <div class="feature">
+                            <i data-lucide="satellite"></i>
+                            <span>Exoplanet Classification</span>
+                        </div>
+                        <div class="feature">
+                            <i data-lucide="server"></i>
+                            <span>REST API</span>
+                        </div>
+                        <div class="feature">
+                            <i data-lucide="monitor"></i>
+                            <span>Web Interface</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Movie Analysis -->
+                <div class="project-card animate-on-scroll" data-tilt>
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i data-lucide="clapperboard"></i>
+                        </div>
+                        <div class="project-links">
+                            <span class="project-status completed">
+                                <span class="status-dot"></span>
+                                Completed
+                            </span>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Movie Analysis</h3>
+                    <p class="project-date">Jul 2025</p>
+                    <p class="project-description">
+                        Intelligent system leveraging Data Science and AI to analyze movies and audience
+                        feedback. Performed genre classification, sentiment analysis, engagement tracking,
+                        and rating trend analysis for actionable insights.
+                    </p>
+                    <div class="project-tech">
+                        <span>Data Science</span>
+                        <span>NLP</span>
+                        <span>Sentiment Analysis</span>
+                        <span>Visualization</span>
+                    </div>
+                    <div class="project-features">
+                        <div class="feature">
+                            <i data-lucide="tag"></i>
+                            <span>Genre Classification</span>
+                        </div>
+                        <div class="feature">
+                            <i data-lucide="message-circle"></i>
+                            <span>Sentiment Analysis</span>
+                        </div>
+                        <div class="feature">
+                            <i data-lucide="line-chart"></i>
+                            <span>Trend Analysis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section education" id="education">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">&lt;education&gt;</span>
+                <h2 class="section-title">My <span class="gradient-text">Education</span></h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="education-card animate-on-scroll">
+                <div class="edu-icon">
+                    <i data-lucide="graduation-cap"></i>
+                </div>
+                <div class="edu-content">
+                    <h3>Bachelor of Technology in Computer Science</h3>
+                    <span class="edu-school">
+                        <i data-lucide="building-2"></i>
+                        Zagazig University
+                    </span>
+                    <span class="edu-date">
+                        <i data-lucide="calendar"></i>
+                        Aug 2022 – Expected Jul 2026
+                    </span>
+                    <p class="edu-description">
+                        Specialized in <strong>Computer Science and Artificial Intelligence</strong>.
+                        Focused on deep learning, machine learning algorithms, data structures & algorithms,
+                        and software engineering principles.
+                    </p>
+                    <div class="edu-highlights">
+                        <span>Computer Science</span>
+                        <span>Artificial Intelligence</span>
+                        <span>Deep Learning</span>
+                        <span>Data Structures</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">&lt;contact&gt;</span>
+                <h2 class="section-title">Let's <span class="gradient-text">Connect</span></h2>
+                <div class="section-line"></div>
+                <p class="section-subtitle">Have a project in mind or want to collaborate? I'd love to hear from you!
+                </p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info animate-on-scroll">
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <i data-lucide="mail"></i>
+                        </div>
+                        <div class="contact-card-content">
+                            <span class="contact-card-label">Email</span>
+                            <a href="mailto:ahmed28cs@gmail.com" class="contact-card-value">ahmed28cs@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <i data-lucide="phone"></i>
+                        </div>
+                        <div class="contact-card-content">
+                            <span class="contact-card-label">Phone</span>
+                            <a href="tel:+201044309560" class="contact-card-value">+20 104 430 9560</a>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <i data-lucide="map-pin"></i>
+                        </div>
+                        <div class="contact-card-content">
+                            <span class="contact-card-label">Location</span>
+                            <span class="contact-card-value">Sharkia, Egypt</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="mailto:ahmed28cs@gmail.com" class="social-link" aria-label="Email">
+                            <i data-lucide="mail"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/eng-ahmed-ai/" class="social-link" target="_blank"
+                            aria-label="LinkedIn">
+                            <i data-lucide="linkedin"></i>
+                        </a>
+                        <a href="https://github.com/A28-Cs" class="social-link" target="_blank" aria-label="GitHub">
+                            <i data-lucide="github"></i>
+                        </a>
+                    </div>
+                </div>
+                <form class="contact-form animate-on-scroll" id="contactForm">
+                    <div class="form-group">
+                        <label for="contactName">Full Name</label>
+                        <div class="input-wrapper">
+                            <i data-lucide="user"></i>
+                            <input type="text" id="contactName" name="name" placeholder="Your name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email</label>
+                        <div class="input-wrapper">
+                            <i data-lucide="mail"></i>
+                            <input type="email" id="contactEmail" name="email" placeholder="your@email.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactSubject">Subject</label>
+                        <div class="input-wrapper">
+                            <i data-lucide="message-square"></i>
+                            <input type="text" id="contactSubject" name="subject" placeholder="What's this about?">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Message</label>
+                        <div class="input-wrapper textarea-wrapper">
+                            <i data-lucide="pen-line"></i>
+                            <textarea id="contactMessage" name="message" placeholder="Tell me about your project..."
+                                rows="5" required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-submit">
+                        <span>Send Message</span>
+                        <i data-lucide="send"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-bracket">&lt;</span>
+                    <span class="logo-text">Ahmed Ismail</span>
+                    <span class="logo-bracket">/&gt;</span>
+                </div>
+                <p class="footer-text">Crafting intelligent systems, one model at a time.</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Ahmed Ismail. Built with passion & code.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
