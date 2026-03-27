@@ -459,6 +459,23 @@ function initContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
 
+    const phoneInput = document.getElementById("contactPhone");
+    let iti = null;
+    if (phoneInput && window.intlTelInput) {
+        iti = window.intlTelInput(phoneInput, {
+            initialCountry: "eg",
+            separateDialCode: true,
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+        });
+
+        // Prevent leading zero as requested
+        phoneInput.addEventListener("input", function() {
+            if (this.value.startsWith("0")) {
+                this.value = this.value.substring(1);
+            }
+        });
+    }
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -472,6 +489,7 @@ function initContactForm() {
 
         const name = document.getElementById('contactName').value;
         const email = document.getElementById('contactEmail').value;
+        const phone = iti ? iti.getNumber() : document.getElementById('contactPhone').value;
         const subject = document.getElementById('contactSubject').value;
         const message = document.getElementById('contactMessage').value;
 
@@ -489,6 +507,7 @@ function initContactForm() {
             body: JSON.stringify({
                 name: name,
                 email: email,
+                phone: phone,
                 subject: subject,
                 message: message
             })

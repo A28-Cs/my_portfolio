@@ -2378,6 +2378,60 @@ a.contact-card-value:hover {
     min-height: 120px;
 }
 
+/* Phone Input Custom Styles */
+.phone-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.phone-wrapper .iti {
+    width: 100%;
+}
+
+.phone-wrapper input {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-primary);
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    transition: all var(--transition-fast);
+    outline: none;
+}
+
+.phone-wrapper input:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.phone-wrapper input::placeholder {
+    color: var(--text-muted);
+}
+
+.iti__country-list {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    white-space: normal;
+}
+
+.iti__country-name {
+    color: var(--text-primary);
+}
+
+html[dir="rtl"] .iti__flag-container {
+    right: 0;
+    left: auto;
+}
+
+html[dir="rtl"] .iti__selected-flag {
+    padding: 0 16px 0 8px;
+}
+
 .btn-submit {
     width: 100%;
     justify-content: center;
