@@ -516,8 +516,9 @@ function initContactForm() {
             // Helpful alert for local development
             if (window.location.protocol === 'file:') {
                 alert("Error: FormSubmit does not work when opening HTML files directly (file://). Please use a local web server (like VS Code Live Server) or deploy your site.");
-            } else if (error.message && error.message.includes('FormSubmit')) {
-                alert("FormSubmit Error: " + error.message);
+            } else if (error.message) {
+                // Show the specific error message returned by FormSubmit API
+                alert("Message from FormSubmit:\n\n" + error.message);
             }
             
             btn.innerHTML = `<span>${txtError}</span>`;
