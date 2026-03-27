@@ -216,6 +216,8 @@ ul {
     font-weight: 700;
     letter-spacing: 4px;
     margin-bottom: 24px;
+    direction: ltr;
+    unicode-bidi: isolate;
 }
 
 .loader-text span {
