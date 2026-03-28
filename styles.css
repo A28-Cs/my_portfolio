@@ -2610,14 +2610,49 @@ a.contact-card-value:hover {
     font-size: 0.82rem;
 }
 
-/* RTL adjustments */
-html[dir="rtl"] .iti__flag-container {
-    right: 0;
-    left: auto;
+/* RTL adjustments for intl-tel-input v25 */
+html[dir="rtl"] .iti__country-container {
+    right: 0 !important;
+    left: auto !important;
 }
 
-html[dir="rtl"] .iti__selected-flag {
-    padding: 0 16px 0 8px;
+html[dir="rtl"] .phone-wrapper input {
+    padding-left: 16px !important;
+    padding-right: 110px !important; /* Make room for the country code/flag on the right */
+    text-align: right !important; 
+    direction: ltr !important; /* Keep typing numbers correctly */
+}
+
+html[dir="rtl"] .phone-wrapper input::placeholder {
+    text-align: right;
+}
+
+html[dir="rtl"] .iti__dropdown-content {
+    right: 0 !important;
+    left: auto !important;
+    text-align: right !important;
+}
+
+html[dir="rtl"] .iti__country {
+    direction: rtl !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+}
+
+html[dir="rtl"] .iti__country-name {
+    margin-right: 8px !important;
+    margin-left: 8px !important;
+}
+
+html[dir="rtl"] .iti__dial-code {
+    margin-left: 0 !important;
+    margin-right: auto !important; /* Push dial code to the left edge inside the RTL container */
+}
+
+html[dir="rtl"] .iti__search-input {
+    text-align: right !important;
+    direction: rtl !important;
 }
 
 .btn-submit {

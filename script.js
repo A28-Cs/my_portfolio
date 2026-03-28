@@ -66,6 +66,11 @@ function applyLanguage(lang) {
         certGrid.innerHTML = '';
         initCertificates();
     }
+
+    // Re-initialize phone input for RTL layout changes
+    if (window.initPhoneInput) {
+        window.initPhoneInput();
+    }
 }
 
 /* ===== LOADER ===== */
@@ -460,9 +465,18 @@ function initContactForm() {
     if (!form) return;
 
     const phoneInput = document.getElementById("contactPhone");
-    let iti = null;
-    if (phoneInput && window.intlTelInput) {
-        iti = window.intlTelInput(phoneInput, {
+    
+    // Abstract the phone initialization to be reusable 
+    window.initPhoneInput = function() {
+        if (!phoneInput || !window.intlTelInput) return;
+        
+        let currentStatus = '';
+        if (window.phoneItiInstance) {
+            currentStatus = window.phoneItiInstance.getNumber();
+            window.phoneItiInstance.destroy();
+        }
+
+        window.phoneItiInstance = window.intlTelInput(phoneInput, {
             initialCountry: "auto",
             geoIpLookup: function(callback) {
                 fetch("https://ipapi.co/json")
@@ -475,6 +489,15 @@ function initContactForm() {
             utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/utils.js"
         });
 
+        if (currentStatus) {
+            window.phoneItiInstance.setNumber(currentStatus);
+        }
+    };
+    
+    // Initial call
+    window.initPhoneInput();
+    
+    if (phoneInput) {
         // Prevent leading zero as requested
         phoneInput.addEventListener("input", function() {
             if (this.value.startsWith("0")) {
@@ -496,7 +519,7 @@ function initContactForm() {
 
         const name = document.getElementById('contactName').value;
         const email = document.getElementById('contactEmail').value;
-        const phone = iti ? iti.getNumber() : document.getElementById('contactPhone').value;
+        const phone = window.phoneItiInstance ? window.phoneItiInstance.getNumber() : document.getElementById('contactPhone').value;
         const subject = document.getElementById('contactSubject').value;
         const message = document.getElementById('contactMessage').value;
 
