@@ -613,7 +613,7 @@ function initCertificates() {
             credentialId: 'w64gtl4y72',
             image: './assets/مكتبات علوم البيانات فى لغة البايثون-certificate.jpg',
             verifyUrl: 'https://www.almentor.net/certificate/w64gtl4y72',
-            status: 'Verified'
+            status: statusVerified
         },
         {
             title: 'professional data analyst',
@@ -621,7 +621,7 @@ function initCertificates() {
             credentialId: '1456qc76nrpgxbk28gd6q',
             image: './assets/محلل بيانات محترف-certificate.jpg',
             verifyUrl: 'https://www.almentor.net/certificate/programs/l1456qc76nrpgxbk28gd6q',
-            status: 'Verified'
+            status: statusVerified
         },
         {
             title: 'Data Science Python for Data Analysis',
@@ -629,7 +629,7 @@ function initCertificates() {
             credentialId: 'dpypavjm7g',
             image: './assets/لغة بايثون لعلوم البيانات-certificate (1).jpg',
             verifyUrl: 'https://www.almentor.net/certificate/dpypavjm7g',
-            status: 'Verified'
+            status: statusVerified
         },
         {
             title: 'Applications of Data Science',
@@ -637,7 +637,7 @@ function initCertificates() {
             credentialId: 'g18kaer7jp',
             image: './assets/تطبيقات علم البيانات-certificate (1).jpg',
             verifyUrl: 'https://www.almentor.net/certificate/g18kaer7jp',
-            status: 'Verified'
+            status: statusVerified
         },
         {
             title: 'introduction to data science ',
@@ -645,7 +645,7 @@ function initCertificates() {
             credentialId: 'n7k1a7rply',
             image: './assets/مقدمة في علم البيانات-certificate (1).jpg',
             verifyUrl: 'https://www.almentor.net/certificate/n7k1a7rply',
-            status: 'Verified'
+            status: statusVerified
         },
         {
             title: 'Machine Learning and Deep Neural Networks in Python Programming (DNN)',
@@ -653,7 +653,7 @@ function initCertificates() {
             credentialId: '1lg4ckl4n1',
             image: './assets/Screenshot 2026-03-26 204852.png',
             verifyUrl: 'https://www.almentor.net/certificate/1lg4ckl4n1',
-            status: 'Verified'
+            status: statusVerified
         },
         {
             title: 'Machine Learning and Deep Neural Networks in Python Programming (DNN)',
