@@ -838,6 +838,11 @@ function initServiceModals() {
             const scopeText = currentLang === 'ar' ? 'بناءً على نطاق المشروع' : 'Based on project scope';
             mPrice.innerHTML = `${data.price} <span>${scopeText}</span>`;
 
+            // Update Apply button text based on current language
+            const arrowIcon = currentLang === 'ar' ? 'arrow-left' : 'arrow-right';
+            const applyLabel = currentLang === 'ar' ? 'قدم الآن' : 'Apply Now';
+            applyBtn.innerHTML = `<span>${applyLabel}</span><i data-lucide="${arrowIcon}"></i>`;
+
             // Populate Features
             mFeatures.innerHTML = '';
             data.features.forEach(feat => {
@@ -874,10 +879,6 @@ function initServiceModals() {
     });
 
     // Apply Button logic
-    const applyText = mFeatures; // Just to define context
-    applyBtn.innerHTML = currentLang === 'ar' 
-        ? `<span>قدم الآن</span><i data-lucide="arrow-left"></i>` 
-        : `<span>Apply Now</span><i data-lucide="arrow-right"></i>`;
         
     applyBtn.addEventListener('click', () => {
         closeModal();

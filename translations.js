@@ -98,6 +98,7 @@ const translations = {
         srvTitle1: "My",
         srvTitle2: "Services",
         srvSubtitle: "Delivering end-to-end AI, data, and deployment solutions that power real-world applications and drive measurable business outcomes.",
+        btnViewDetails: "View Details",
 
         // Education
         eduTag: "&lt;education&gt;",
@@ -232,6 +233,7 @@ const translations = {
         srvTitle1: "خدماتي",
         srvTitle2: "الاحترافية",
         srvSubtitle: "تقديم حلول متكاملة في الذكاء الاصطناعي والبيانات ونشر النماذج لدعم التطبيقات الحقيقية وتحقيق نتائج أعمال قابلة للقياس.",
+        btnViewDetails: "عرض التفاصيل",
 
         // Education
         eduTag: "&lt;التعليم&gt;",
