@@ -778,65 +778,80 @@ function initServiceModals() {
     const getServiceData = () => {
         const isAr = currentLang === 'ar';
         return {
-            'service-ai-model': {
-                icon: 'brain',
-                title: isAr ? 'تطوير نماذج الذكاء الاصطناعي' : 'AI Model Development',
-                tagline: isAr ? 'ذكاء مخصص لأعمالك' : 'Custom Intelligence for Your Business',
-                desc: isAr 
-                    ? 'أقوم ببناء وتصميم نماذج تعلم الآلة والتعلم العميق من الصفر. بدءًا من معالجة البيانات وصولاً إلى التقييم الصارم والنشر المتكامل في بيئة الإنتاج.' 
-                    : 'I architect and build tailored Machine Learning and Deep Learning models from scratch. Starting from robust data preprocessing and exploratory analysis, I guide the project through training, rigorous evaluation, and finally seamless production deployment.',
-                features: isAr 
-                    ? ['التحليلات التنبؤية والتوقعات', 'نماذج التصنيف والانحدار', 'معالجة اللغات الطبيعية (NLP)', 'مسارات ML متكاملة'] 
-                    : ['Predictive Analytics & Forecasting', 'Classification & Regression Models', 'Natural Language Processing (NLP)', 'End-to-End ML Pipelines'],
-                price: isAr ? 'تسعير مخصص' : 'Custom Pricing'
+            'service-education': {
+                icon: 'graduation-cap',
+                title: isAr ? 'التعليم التقني والإرشاد' : 'Tech Education & Mentorship',
+                tagline: isAr ? 'تعلم تقني موجّه ومكثّف' : 'Focused, Hands-On Tech Mentoring',
+                desc: isAr
+                    ? 'أقدم دورات منظمة وتدريب فردي (1-on-1) في تطوير الويب الكامل، أساسيات بايثون، تحليل البيانات، الذكاء الاصطناعي (تعلم الآلة والتعلم العميق)، الرؤية الحاسوبية، ومعالجة اللغات الطبيعية — بمحتوى يدمج النظرية مع تطبيقات عملية وأدوات حقيقية.'
+                    : 'Structured courses and private 1-on-1 training across Web Fullstack Development, Python Fundamentals, Data Analysis, AI (Machine Learning & Deep Learning), Computer Vision, and NLP — combining solid theory with real-world tools and hands-on projects.',
+                features: isAr
+                    ? ['تطوير الويب الكامل (Fullstack)', 'بايثون وتحليل البيانات', 'تعلم الآلة والتعلم العميق', 'الرؤية الحاسوبية ومعالجة اللغات الطبيعية', 'مشاريع عملية وإرشاد مهني', 'مسار مخصص لكل متدرب'] 
+                    : ['Web Fullstack Development', 'Python & Data Analysis', 'Machine Learning & Deep Learning', 'Computer Vision & NLP', 'Hands-on Projects & Career Guidance', 'Personalized Learning Path'],
+                tiers: [
+                    {
+                        label: isAr ? 'الإرشاد بالساعة' : 'Hourly Mentorship',
+                        price: '$30 – $50',
+                        unit: isAr ? '/ساعة' : '/ hour',
+                        desc: isAr ? 'جلسات 1-on-1 لحل المشكلات والتوجيه المهني.' : '1-on-1 sessions for problem-solving & career coaching.'
+                    },
+                    {
+                        label: isAr ? 'تصميم منهج مخصص وتسليمه' : 'Full Custom Course Design & Delivery',
+                        price: '$400 – $800',
+                        unit: isAr ? '/منهج كامل' : '/ curriculum',
+                        desc: isAr ? 'منهج متكامل مُصمَّم ومُسلَّم حسب المدة والتعقيد.' : 'Full curriculum designed and delivered end-to-end.'
+                    }
+                ]
             },
-            'service-cv': {
-                icon: 'eye',
-                title: isAr ? 'حلول الرؤية الحاسوبية' : 'Computer Vision Solutions',
-                tagline: isAr ? 'ترى ما لا يُرى' : 'See the Unseen',
-                desc: isAr 
-                    ? 'افتح آفاق البيانات المرئية. أقوم بتطوير أنظمة تعرف بصري ذكية ومصممة بدقة لسير عمل الصناعات المختلفة لتحقيق الاستفادة القصوى.'
-                    : 'Unlock the power of visual data. I develop intelligent visual recognition systems tailored to unique industry workflows, enabling automated image classification, object detection, and comprehensive video analysis.',
-                features: isAr 
-                    ? ['اكتشاف الكائنات وتتبعها', 'تصنيف الصور وتجزئتها', 'تحليل الصور الطبية', 'الذكاء الاصطناعي الزراعي'] 
-                    : ['Object Detection & Tracking', 'Image Classification & Segmentation', 'Medical Image Analysis', 'Agricultural & Remote Sensing AI'],
-                price: isAr ? 'تسعير مخصص' : 'Custom Pricing'
+            'service-web': {
+                icon: 'layout-template',
+                title: isAr ? 'حلول تطوير الويب' : 'Web Development Solutions',
+                tagline: isAr ? 'تجارب رقمية سريعة ومصممة بعناية' : 'Fast, Polished Digital Experiences',
+                desc: isAr
+                    ? 'تصميم وتطوير تطبيقات ويب حديثة ومتجاوبة بالكامل — من صفحات الهبوط عالية التحويل إلى منصات التجارة الإلكترونية والتعلم الإلكتروني المتكاملة. كل منصة شاملة تأتي بلوحة تحكم (Dashboard) مخصصة لإدارة المحتوى والمستخدمين والبيانات.'
+                    : 'Designing and developing highly responsive, modern web applications — from high-converting landing pages to fully integrated E-commerce and E-learning platforms. All comprehensive platforms (excluding basic landing pages) ship with a custom Admin Dashboard for effective content, user, and data management.',
+                features: isAr
+                    ? ['صفحات هبوط عالية التحويل', 'منصات تجارة إلكترونية متكاملة', 'منصات تعلم إلكتروني', 'لوحة تحكم مخصصة (Admin Dashboard)', 'تصميم متجاوب وتجربة مستخدم فائقة', 'تكامل بوابات الدفع'] 
+                    : ['High-Converting Landing Pages', 'Full E-commerce Platforms', 'E-learning Platforms', 'Custom Admin Dashboard', 'Responsive Design & Optimized UX', 'Payment Gateway Integrations'],
+                tiers: [
+                    {
+                        label: isAr ? 'صفحة هبوط قياسية' : 'Standard Landing Page',
+                        price: '$200 – $400',
+                        unit: '',
+                        desc: isAr ? 'صفحة واحدة متجاوبة وجذابة مُحسَّنة للتحويل.' : 'Single-page, conversion-focused and fully responsive.'
+                    },
+                    {
+                        label: isAr ? 'منصة تجارة إلكترونية / تعلم إلكتروني' : 'E-commerce / E-learning Platform',
+                        price: '$1,000 – $2,500+',
+                        unit: '',
+                        desc: isAr ? 'منصة كاملة مع لوحة تحكم وتكامل بوابات الدفع.' : 'Full platform with dashboard & payment integrations.'
+                    }
+                ]
             },
-            'service-data': {
-                icon: 'bar-chart-3',
-                title: isAr ? 'تحليل مسارات البيانات' : 'Data Analysis & Insights',
-                tagline: isAr ? 'تتحول البيانات إلى قرارات' : 'Turn Data into Decisions',
-                desc: isAr 
-                    ? 'البيانات الخام ليس لها قيمة حتى تُفهم. أقوم بتحويل البيانات المعقدة إلى معلومات استخبارية للأعمال عبر التحليل الإحصائي واكتشاف الشذوذ وصناعة لوحات معلومات (Dashboards) تفاعلية ومصقولة عالية الدقة.'
-                    : 'Raw data has no value until it is understood. I transform complex datasets into actionable business intelligence through deep statistical analysis, anomaly detection, and highly interactive, polished dashboards.',
-                features: isAr 
-                    ? ['تنظيف البيانات ومعالجتها بشكل مسبق', 'التحليل الاستكشافي (EDA)', 'لوحات Power BI تفاعلية', 'إنشاء تقارير قابلة للتطبيق'] 
-                    : ['Data Cleaning & Preprocessing', 'Exploratory Data Analysis (EDA)', 'Interactive Power BI Dashboards', 'Actionable Business Reporting'],
-                price: isAr ? 'تسعير مخصص' : 'Custom Pricing'
-            },
-            'service-integration': {
-                icon: 'server',
-                title: isAr ? 'تكامل أنظمة الذكاء' : 'AI Systems Integration',
-                tagline: isAr ? 'ذكاء اصطناعي متصل بسلاسة' : 'AI Seamlessly Connected',
-                desc: isAr 
-                    ? 'النماذج الرائعة تحتاج إلى بيئة رائعة لتعمل بها. أقوم بتحويل النماذج المدربة إلى واجهات برمجة تطبيقات (APIs) جاهزة للإنتاج، ودمجها بسلاسة مع تطبيقات الويب والموبايل لتجربة مستخدم لا مثيل لها.'
-                    : 'Great models need a great environment to run in. I convert trained models into highly concurrent, production-ready APIs and integrate these intelligent capabilities seamlessly into your existing web, mobile, or desktop applications.',
-                features: isAr 
-                    ? ['تطوير واجهات FastAPI قابلة للتوسع', 'تكامل بيئة .NET و Python', 'اتصال تطبيقات الويب والهواتف', 'نشر سحابي آمن (Cloud Deployment)'] 
-                    : ['Scalable Flask / FastAPI Development', '.NET & Python Integration', 'Web & Mobile App Connectivity', 'Secure Cloud Deployment'],
-                price: isAr ? 'تسعير مخصص' : 'Custom Pricing'
-            },
-            'service-mlops': {
-                icon: 'settings',
-                title: isAr ? 'عمليات MLOps والتحسين' : 'MLOps & Optimization',
-                tagline: isAr ? 'التطوير والصيانة بثقة' : 'Scale & Maintain with Confidence',
-                desc: isAr 
-                    ? 'نشر النموذج هو مجرد البداية. أقوم بتبسيط دورة حياة تعلم الآلة الخاصة بك من خلال إعداد تتبع التجارب، ومراقبة أداء النماذج، وتنفيذ استراتيجيات دقيقة لضبط إمكانات واستمرارية النظام وموثوقيته.'
-                    : 'Deploying a model is only the beginning. I streamline your entire ML lifecycle by setting up comprehensive experiment tracking, model performance monitoring, and targeted fine-tuning strategies for long-term reliability.',
-                features: isAr 
-                    ? ['تتبع التجارب باستخدام MLflow', 'إدارة دورة حياة النماذج', 'تحسين الأداء والتطوير', 'نشروالنماذج اللغوية (LLMs)'] 
-                    : ['MLflow Experiment Tracking', 'Model Lifecycle Management', 'Performance Optimization', 'LLM Fine-Tuning & Deployment'],
-                price: isAr ? 'تسعير مخصص' : 'Custom Pricing'
+            'service-ai': {
+                icon: 'brain-circuit',
+                title: isAr ? 'تطوير نماذج ذكاء اصطناعي مخصصة' : 'Custom AI Model Development',
+                tagline: isAr ? 'ذكاء اصطناعي مُصمَّم لأعمالك' : 'Bespoke AI Tailored to Your Domain',
+                desc: isAr
+                    ? 'تصميم وتدريب ونشر نماذج ذكاء اصطناعي مخصصة لحل تحديات أعمال وتقنية محددة. متخصص في التنبؤ بالبيانات، تصنيف الصور والنصوص، اكتشاف الكائنات، والتشخيص الآلي — حلول قابلة للتوسع وسهلة الدمج.'
+                    : 'Architecting, training, and deploying bespoke AI models tailored to specific business and technical challenges. Specialized in Data Prediction, Image/Text Classification, Object Detection, and Automated Diagnosis — scalable, adjustable, and seamlessly integrated.',
+                features: isAr
+                    ? ['التنبؤ بالبيانات والتوقعات', 'تصنيف الصور والنصوص', 'اكتشاف الكائنات والتجزئة', 'التشخيص الآلي', 'قابل للتوسع والتعديل', 'تكامل سلس عبر واجهات API'] 
+                    : ['Data Prediction & Forecasting', 'Image & Text Classification', 'Object Detection & Segmentation', 'Automated Diagnosis', 'Scalable & Adjustable Architecture', 'Seamless API Integration'],
+                tiers: [
+                    {
+                        label: isAr ? 'نموذج أساسي' : 'Basic Model',
+                        price: '$500 – $900',
+                        unit: '',
+                        desc: isAr ? 'تصنيف/تنبؤ قياسي مع تدريب وتقييم.' : 'Standard classification or prediction, trained & evaluated.'
+                    },
+                    {
+                        label: isAr ? 'نموذج متقدم' : 'Advanced Model',
+                        price: '$1,000 – $2,500+',
+                        unit: '',
+                        desc: isAr ? 'اكتشاف معقد، تشخيص آلي، أو تكامل API كامل.' : 'Complex detection, diagnosis, or full API integration.'
+                    }
+                ]
             }
         };
     };
@@ -845,6 +860,20 @@ function initServiceModals() {
 
     // Open Modal logic
     document.querySelectorAll('.service-card').forEach(card => {
+        // Primary CTA → go straight to contact with prefilled subject
+        const primaryBtn = card.querySelector('[data-action="request"]');
+        if (primaryBtn) {
+            primaryBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = card.id;
+                const data = getServiceData()[id];
+                if (!data) return;
+                currentSelectedService = data.title;
+                scrollToContactWithSubject(currentSelectedService);
+            });
+        }
+
+        // Open the modal for any other click on the card (including "View Details")
         card.addEventListener('click', () => {
             const id = card.id;
             const data = getServiceData()[id];
@@ -857,13 +886,28 @@ function initServiceModals() {
             mTitle.textContent = data.title;
             mTagline.textContent = data.tagline;
             mDesc.textContent = data.desc;
-            
-            const scopeText = currentLang === 'ar' ? 'بناءً على نطاق المشروع' : 'Based on project scope';
-            mPrice.innerHTML = `${data.price} <span>${scopeText}</span>`;
+
+            // Build pricing tiers block
+            const tiersLabel = currentLang === 'ar' ? 'خطط التسعير' : 'Pricing Tiers';
+            const tiersHtml = `
+                <div class="service-modal-tiers">
+                    <div class="service-modal-tiers-title">${tiersLabel}</div>
+                    ${data.tiers.map(t => `
+                        <div class="service-modal-tier">
+                            <div class="service-modal-tier-head">
+                                <span class="service-modal-tier-label">${t.label}</span>
+                                <span class="service-modal-tier-price">${t.price}${t.unit ? `<span>${t.unit}</span>` : ''}</span>
+                            </div>
+                            <div class="service-modal-tier-desc">${t.desc}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            mPrice.innerHTML = tiersHtml;
 
             // Update Apply button text based on current language
             const arrowIcon = currentLang === 'ar' ? 'arrow-left' : 'arrow-right';
-            const applyLabel = currentLang === 'ar' ? 'قدم الآن' : 'Apply Now';
+            const applyLabel = currentLang === 'ar' ? 'قدم الآن' : 'Request This Service';
             applyBtn.innerHTML = `<span>${applyLabel}</span><i data-lucide="${arrowIcon}"></i>`;
 
             // Populate Features
@@ -901,26 +945,27 @@ function initServiceModals() {
         }
     });
 
-    // Apply Button logic
-        
-    applyBtn.addEventListener('click', () => {
-        closeModal();
+    // Shared helper: scroll to contact and prefill subject
+    function scrollToContactWithSubject(serviceTitle) {
         const contactSection = document.getElementById('contact');
         const subjectInput = document.getElementById('contactSubject');
-        
+
         if (contactSection) {
             contactSection.scrollIntoView({ behavior: 'smooth' });
         }
-        
+
         if (subjectInput) {
-            // Wait slightly for scroll to start, then fill input
             setTimeout(() => {
-                subjectInput.value = `Service Inquiry: ${currentSelectedService}`;
+                subjectInput.value = `Service Inquiry: ${serviceTitle}`;
                 subjectInput.focus();
-                
-                // Trigger input event to handle any animated labels if exist
                 subjectInput.dispatchEvent(new Event('input'));
             }, 600);
         }
+    }
+
+    // Apply Button logic
+    applyBtn.addEventListener('click', () => {
+        closeModal();
+        scrollToContactWithSubject(currentSelectedService);
     });
 }
