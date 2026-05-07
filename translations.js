@@ -101,13 +101,14 @@ const translations = {
         btnViewDetails: "View Details",
         btnRequestService: "Request Service",
         srvMostRequested: "Most Requested",
+        srvPriceLabel: "Price",
         perHour: "/ hour",
         perCourse: "/ curriculum",
         srvFootnote: "All prices are indicative ranges. Final quote depends on scope, complexity, and integrations — get a tailored proposal in under 24 hours.",
 
         // Service 1 – Tech Education & Mentorship
         srv1Chip: "Mentorship &amp; Training",
-        srv1Title: "Tech Education &amp; Mentorship",
+        srv1Title: "Custom Course Design",
         srv1Desc: "Structured courses and private 1-on-1 training across Web Fullstack, Python, Data Analysis, Machine Learning, Deep Learning, Computer Vision, and NLP.",
         srv1Approach: "Theory fused with hands-on real-world tools and guided projects.",
         srv1Cap1: "Web Fullstack",
@@ -130,8 +131,10 @@ const translations = {
         srv2Cap4: "Admin Dashboard",
         srv2Tier1: "Standard Landing Page",
         srv2Tier1Desc: "Single-page, conversion-focused, fully responsive.",
-        srv2Tier2: "E-commerce / E-learning Platform",
+        srv2Tier2: "E-commerce Platform",
         srv2Tier2Desc: "Full platform with dashboard &amp; payment integrations.",
+        srv2Tier3: "E-learning Platform",
+        srv2Tier3Desc: "Full platform with dashboard &amp; payment integrations.",
 
         // Service 3 – Custom AI Model Development
         srv3Chip: "Custom AI Engineering",
@@ -283,13 +286,14 @@ const translations = {
         btnViewDetails: "عرض التفاصيل",
         btnRequestService: "اطلب الخدمة",
         srvMostRequested: "الأكثر طلبًا",
+        srvPriceLabel: "السعر",
         perHour: "/ الساعة",
         perCourse: "/ منهج كامل",
         srvFootnote: "جميع الأسعار نطاقات استرشادية. العرض النهائي يعتمد على نطاق المشروع والتعقيد والتكاملات — احصل على عرض مخصص خلال أقل من 24 ساعة.",
 
         // Service 1 – Tech Education & Mentorship
         srv1Chip: "إرشاد وتدريب",
-        srv1Title: "التعليم التقني والإرشاد",
+        srv1Title: "تصميم منهج مخصص",
         srv1Desc: "دورات منظمة وتدريب فردي (1-on-1) في تطوير الويب الكامل، بايثون، تحليل البيانات، تعلم الآلة، التعلم العميق، الرؤية الحاسوبية، ومعالجة اللغات الطبيعية.",
         srv1Approach: "نظرية مدمجة مع أدوات حقيقية ومشاريع تطبيقية موجَّهة.",
         srv1Cap1: "تطوير الويب الكامل",
@@ -312,8 +316,10 @@ const translations = {
         srv2Cap4: "لوحة تحكم إدارية",
         srv2Tier1: "صفحة هبوط قياسية",
         srv2Tier1Desc: "صفحة واحدة متجاوبة ومُحسَّنة للتحويل.",
-        srv2Tier2: "منصة تجارة / تعلم إلكتروني",
+        srv2Tier2: "منصة تجارة إلكترونية",
         srv2Tier2Desc: "منصة كاملة مع لوحة تحكم وتكاملات دفع.",
+        srv2Tier3: "منصة تعلم إلكتروني",
+        srv2Tier3Desc: "منصة كاملة مع لوحة تحكم وتكاملات دفع.",
 
         // Service 3 – Custom AI Model Development
         srv3Chip: "هندسة ذكاء اصطناعي مخصص",

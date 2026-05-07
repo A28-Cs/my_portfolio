@@ -778,76 +778,115 @@ function initServiceModals() {
     const getServiceData = () => {
         const isAr = currentLang === 'ar';
         return {
-            'service-education': {
+            'service-course': {
                 icon: 'graduation-cap',
-                title: isAr ? 'التعليم التقني والإرشاد' : 'Tech Education & Mentorship',
+                title: isAr ? 'تصميم منهج مخصص' : 'Custom Course Design',
                 tagline: isAr ? 'تعلم تقني موجّه ومكثّف' : 'Focused, Hands-On Tech Mentoring',
                 desc: isAr
-                    ? 'أقدم دورات منظمة وتدريب فردي (1-on-1) في تطوير الويب الكامل، أساسيات بايثون، تحليل البيانات، الذكاء الاصطناعي (تعلم الآلة والتعلم العميق)، الرؤية الحاسوبية، ومعالجة اللغات الطبيعية — بمحتوى يدمج النظرية مع تطبيقات عملية وأدوات حقيقية.'
-                    : 'Structured courses and private 1-on-1 training across Web Fullstack Development, Python Fundamentals, Data Analysis, AI (Machine Learning & Deep Learning), Computer Vision, and NLP — combining solid theory with real-world tools and hands-on projects.',
+                    ? 'أقدم منهج متكامل مُصمَّم ومُسلَّم حسب المدة والتعقيد في مجالات الذكاء الاصطناعي وتطوير الويب.'
+                    : 'Full curriculum designed and delivered end-to-end across Web Fullstack, Python, Data Analysis, and AI.',
                 features: isAr
                     ? ['تطوير الويب الكامل (Fullstack)', 'بايثون وتحليل البيانات', 'تعلم الآلة والتعلم العميق', 'الرؤية الحاسوبية ومعالجة اللغات الطبيعية', 'مشاريع عملية وإرشاد مهني', 'مسار مخصص لكل متدرب'] 
                     : ['Web Fullstack Development', 'Python & Data Analysis', 'Machine Learning & Deep Learning', 'Computer Vision & NLP', 'Hands-on Projects & Career Guidance', 'Personalized Learning Path'],
                 tiers: [
                     {
-                        label: isAr ? 'الإرشاد بالساعة' : 'Hourly Mentorship',
-                        price: '$30 – $50',
-                        unit: isAr ? '/ساعة' : '/ hour',
-                        desc: isAr ? 'جلسات 1-on-1 لحل المشكلات والتوجيه المهني.' : '1-on-1 sessions for problem-solving & career coaching.'
-                    },
-                    {
-                        label: isAr ? 'تصميم منهج مخصص وتسليمه' : 'Full Custom Course Design & Delivery',
-                        price: '$400 – $800',
+                        label: isAr ? 'السعر' : 'Price',
+                        price: '$400 – $1200',
                         unit: isAr ? '/منهج كامل' : '/ curriculum',
-                        desc: isAr ? 'منهج متكامل مُصمَّم ومُسلَّم حسب المدة والتعقيد.' : 'Full curriculum designed and delivered end-to-end.'
+                        desc: isAr ? 'منهج متكامل مُصمَّم ومُسلَّم.' : 'Full curriculum designed and delivered end-to-end.'
                     }
                 ]
             },
-            'service-web': {
+            'service-landing': {
                 icon: 'layout-template',
-                title: isAr ? 'حلول تطوير الويب' : 'Web Development Solutions',
+                title: isAr ? 'صفحة هبوط قياسية' : 'Standard Landing Page',
                 tagline: isAr ? 'تجارب رقمية سريعة ومصممة بعناية' : 'Fast, Polished Digital Experiences',
                 desc: isAr
-                    ? 'تصميم وتطوير تطبيقات ويب حديثة ومتجاوبة بالكامل — من صفحات الهبوط عالية التحويل إلى منصات التجارة الإلكترونية والتعلم الإلكتروني المتكاملة. كل منصة شاملة تأتي بلوحة تحكم (Dashboard) مخصصة لإدارة المحتوى والمستخدمين والبيانات.'
-                    : 'Designing and developing highly responsive, modern web applications — from high-converting landing pages to fully integrated E-commerce and E-learning platforms. All comprehensive platforms (excluding basic landing pages) ship with a custom Admin Dashboard for effective content, user, and data management.',
+                    ? 'تصميم وتطوير صفحات هبوط حديثة ومتجاوبة بالكامل وعالية التحويل.'
+                    : 'Designing and developing highly responsive, modern, conversion-focused landing pages.',
                 features: isAr
-                    ? ['صفحات هبوط عالية التحويل', 'منصات تجارة إلكترونية متكاملة', 'منصات تعلم إلكتروني', 'لوحة تحكم مخصصة (Admin Dashboard)', 'تصميم متجاوب وتجربة مستخدم فائقة', 'تكامل بوابات الدفع'] 
-                    : ['High-Converting Landing Pages', 'Full E-commerce Platforms', 'E-learning Platforms', 'Custom Admin Dashboard', 'Responsive Design & Optimized UX', 'Payment Gateway Integrations'],
+                    ? ['تصميم متجاوب بالكامل', 'أداء عالي وسريع', 'تهيئة لمحركات البحث (SEO)', 'تجربة مستخدم محسنة'] 
+                    : ['Fully Responsive Design', 'High Performance & Speed', 'SEO Optimization', 'Optimized UX'],
                 tiers: [
                     {
-                        label: isAr ? 'صفحة هبوط قياسية' : 'Standard Landing Page',
-                        price: '$200 – $400',
+                        label: isAr ? 'السعر' : 'Price',
+                        price: '$20 – $100',
                         unit: '',
                         desc: isAr ? 'صفحة واحدة متجاوبة وجذابة مُحسَّنة للتحويل.' : 'Single-page, conversion-focused and fully responsive.'
-                    },
+                    }
+                ]
+            },
+            'service-ecommerce': {
+                icon: 'shopping-bag',
+                title: isAr ? 'منصة تجارة إلكترونية' : 'E-commerce Platform',
+                tagline: isAr ? 'مبيعات غير محدودة عبر الإنترنت' : 'Sell Online Seamlessly',
+                desc: isAr
+                    ? 'منصة تجارة إلكترونية متكاملة مع لوحة تحكم وتكامل بوابات الدفع.'
+                    : 'Full e-commerce platform with admin dashboard and payment integrations.',
+                features: isAr
+                    ? ['إدارة المنتجات والمخزون', 'بوابات دفع آمنة', 'لوحة تحكم إدارية', 'تصميم متجاوب', 'تجربة مستخدم محسنة'] 
+                    : ['Product & Inventory Management', 'Secure Payment Gateways', 'Admin Dashboard', 'Responsive Design', 'Optimized UX'],
+                tiers: [
                     {
-                        label: isAr ? 'منصة تجارة إلكترونية / تعلم إلكتروني' : 'E-commerce / E-learning Platform',
-                        price: '$1,000 – $2,500+',
+                        label: isAr ? 'السعر' : 'Price',
+                        price: '$100 – $700',
                         unit: '',
                         desc: isAr ? 'منصة كاملة مع لوحة تحكم وتكامل بوابات الدفع.' : 'Full platform with dashboard & payment integrations.'
                     }
                 ]
             },
-            'service-ai': {
-                icon: 'brain-circuit',
-                title: isAr ? 'تطوير نماذج ذكاء اصطناعي مخصصة' : 'Custom AI Model Development',
-                tagline: isAr ? 'ذكاء اصطناعي مُصمَّم لأعمالك' : 'Bespoke AI Tailored to Your Domain',
+            'service-elearning': {
+                icon: 'book-open-check',
+                title: isAr ? 'منصة تعلم إلكتروني' : 'E-learning Platform',
+                tagline: isAr ? 'منصات تعليمية متكاملة' : 'Comprehensive Educational Platforms',
                 desc: isAr
-                    ? 'تصميم وتدريب ونشر نماذج ذكاء اصطناعي مخصصة لحل تحديات أعمال وتقنية محددة. متخصص في التنبؤ بالبيانات، تصنيف الصور والنصوص، اكتشاف الكائنات، والتشخيص الآلي — حلول قابلة للتوسع وسهلة الدمج.'
-                    : 'Architecting, training, and deploying bespoke AI models tailored to specific business and technical challenges. Specialized in Data Prediction, Image/Text Classification, Object Detection, and Automated Diagnosis — scalable, adjustable, and seamlessly integrated.',
+                    ? 'منصة تعلم إلكتروني متكاملة مع لوحة تحكم لإدارة الدورات والطلاب.'
+                    : 'Full e-learning platform with admin dashboard for managing courses and students.',
                 features: isAr
-                    ? ['التنبؤ بالبيانات والتوقعات', 'تصنيف الصور والنصوص', 'اكتشاف الكائنات والتجزئة', 'التشخيص الآلي', 'قابل للتوسع والتعديل', 'تكامل سلس عبر واجهات API'] 
-                    : ['Data Prediction & Forecasting', 'Image & Text Classification', 'Object Detection & Segmentation', 'Automated Diagnosis', 'Scalable & Adjustable Architecture', 'Seamless API Integration'],
+                    ? ['إدارة الدورات التدريبية', 'تتبع تقدم الطلاب', 'بوابات دفع آمنة', 'لوحة تحكم إدارية', 'أدوات تقييم'] 
+                    : ['Course Management', 'Student Progress Tracking', 'Secure Payment Gateways', 'Admin Dashboard', 'Assessment Tools'],
                 tiers: [
                     {
-                        label: isAr ? 'نموذج أساسي' : 'Basic Model',
-                        price: '$500 – $900',
+                        label: isAr ? 'السعر' : 'Price',
+                        price: '$250 – $1200',
+                        unit: '',
+                        desc: isAr ? 'منصة كاملة مع لوحة تحكم وتكامل بوابات الدفع.' : 'Full platform with dashboard & payment integrations.'
+                    }
+                ]
+            },
+            'service-ai-basic': {
+                icon: 'brain-circuit',
+                title: isAr ? 'نموذج أساسي' : 'Basic Model',
+                tagline: isAr ? 'ذكاء اصطناعي مُصمَّم لأعمالك' : 'Bespoke AI Tailored to Your Domain',
+                desc: isAr
+                    ? 'تصنيف أو تنبؤ قياسي باستخدام البيانات أو الصور مع تدريب وتقييم شامل.'
+                    : 'Standard classification or prediction using data or images, fully trained and evaluated.',
+                features: isAr
+                    ? ['التنبؤ بالبيانات والتوقعات', 'تصنيف الصور والنصوص', 'تدريب وتقييم النموذج', 'قابل للتوسع والتعديل'] 
+                    : ['Data Prediction & Forecasting', 'Image & Text Classification', 'Model Training & Evaluation', 'Scalable & Adjustable Architecture'],
+                tiers: [
+                    {
+                        label: isAr ? 'السعر' : 'Price',
+                        price: '$120 – $400',
                         unit: '',
                         desc: isAr ? 'تصنيف/تنبؤ قياسي مع تدريب وتقييم.' : 'Standard classification or prediction, trained & evaluated.'
-                    },
+                    }
+                ]
+            },
+            'service-ai-advanced': {
+                icon: 'cpu',
+                title: isAr ? 'نموذج متقدم' : 'Advanced Model',
+                tagline: isAr ? 'أنظمة ذكية متطورة' : 'Advanced Intelligent Systems',
+                desc: isAr
+                    ? 'اكتشاف كائنات معقد، تشخيص آلي، أو تكامل API كامل لمشاكل الأعمال المعقدة.'
+                    : 'Complex object detection, automated diagnosis, or full API integration for complex business problems.',
+                features: isAr
+                    ? ['اكتشاف الكائنات والتجزئة', 'التشخيص الآلي', 'تكامل سلس عبر واجهات API', 'هيكلية قابلة للتوسع'] 
+                    : ['Object Detection & Segmentation', 'Automated Diagnosis', 'Seamless API Integration', 'Scalable Architecture'],
+                tiers: [
                     {
-                        label: isAr ? 'نموذج متقدم' : 'Advanced Model',
-                        price: '$1,000 – $2,500+',
+                        label: isAr ? 'السعر' : 'Price',
+                        price: '$800 – $2500',
                         unit: '',
                         desc: isAr ? 'اكتشاف معقد، تشخيص آلي، أو تكامل API كامل.' : 'Complex detection, diagnosis, or full API integration.'
                     }
