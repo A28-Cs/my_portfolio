@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Ahmed Ismail</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="translations.js"></script>
+</head>
+
+<body>
+    <!-- Auth Guard Overlay (shown while checking auth) -->
+    <div class="auth-guard" id="authGuard">
+        <div class="auth-guard-content">
+            <div class="auth-guard-ring"></div>
+            <p data-i18n="dashVerifying">Verifying access...</p>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="dash-sidebar" id="dashSidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <span class="logo-bracket">&lt;</span>
+                <span class="logo-text">AI</span>
+                <span class="logo-bracket">/&gt;</span>
+            </a>
+            <span class="sidebar-title" data-i18n="dashTitle">Dashboard</span>
+        </div>
+
+        <nav class="sidebar-nav" id="sidebarNav">
+            <button class="sidebar-link active" data-module="overview">
+                <i data-lucide="layout-dashboard"></i>
+                <span data-i18n="dashOverview">Overview</span>
+            </button>
+            <button class="sidebar-link" data-module="settings">
+                <i data-lucide="settings"></i>
+                <span data-i18n="dashSettings">Site Settings</span>
+            </button>
+            <button class="sidebar-link" data-module="services">
+                <i data-lucide="briefcase"></i>
+                <span data-i18n="dashServices">Services</span>
+            </button>
+            <button class="sidebar-link" data-module="skills">
+                <i data-lucide="cpu"></i>
+                <span data-i18n="dashSkills">Skills</span>
+            </button>
+            <button class="sidebar-link" data-module="experience">
+                <i data-lucide="briefcase-business"></i>
+                <span data-i18n="dashExperience">Experience</span>
+            </button>
+            <button class="sidebar-link" data-module="certificates">
+                <i data-lucide="award"></i>
+                <span data-i18n="dashCertificates">Certificates</span>
+            </button>
+            <button class="sidebar-link" data-module="education">
+                <i data-lucide="graduation-cap"></i>
+                <span data-i18n="dashEducation">Education</span>
+            </button>
+            <button class="sidebar-link" data-module="projects">
+                <i data-lucide="folder-open"></i>
+                <span data-i18n="dashProjects">Projects</span>
+            </button>
+            <button class="sidebar-link" data-module="messages">
+                <i data-lucide="mail"></i>
+                <span data-i18n="dashMessages">Messages</span>
+                <span class="sidebar-badge" id="unreadBadge" style="display:none;">0</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a class="sidebar-home" href="index.html">
+                <i data-lucide="home"></i>
+                <span data-i18n="dashHome">Home Page</span>
+            </a>
+            <button class="sidebar-lang" id="dashLangToggle">
+                <i data-lucide="globe"></i>
+                <span id="dashCurrentLang">EN</span>
+            </button>
+            <button class="sidebar-logout" id="dashLogout">
+                <i data-lucide="log-out"></i>
+                <span data-i18n="dashLogout">Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Mobile header -->
+    <header class="dash-mobile-header" id="dashMobileHeader">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
+            <i data-lucide="menu"></i>
+        </button>
+        <span class="mobile-title" data-i18n="dashTitle">Dashboard</span>
+        <div class="mobile-header-actions">
+            <a class="mobile-home" href="index.html" aria-label="Home Page">
+                <i data-lucide="home"></i>
+            </a>
+            <button class="mobile-logout" id="mobileLogout" aria-label="Logout">
+                <i data-lucide="log-out"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile sidebar overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main content area -->
+    <main class="dash-main" id="dashMain">
+        <!-- Module containers - only one visible at a time -->
+
+        <!-- Overview Module -->
+        <section class="dash-module" id="module-overview">
+            <div class="module-header">
+                <h2 data-i18n="dashOverview">Overview</h2>
+            </div>
+            <div class="stats-grid" id="statsGrid">
+                <!-- Stats cards rendered by JS -->
+            </div>
+        </section>
+
+        <!-- Site Settings Module -->
+        <section class="dash-module hidden" id="module-settings">
+            <div class="module-header">
+                <h2 data-i18n="dashSettings">Site Settings</h2>
+            </div>
+            <div class="dash-card">
+                <form id="settingsForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-i18n="dashHeroTitle">Hero Title (Name)</label>
+                            <input type="text" id="settingHeroTitle" placeholder="Ahmed Ismail">
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="dashHeroRole">Hero Role</label>
+                            <input type="text" id="settingHeroRole" placeholder="AI Engineer">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-i18n="dashContactEmail">Contact Email</label>
+                            <input type="email" id="settingContactEmail" placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="dashContactPhone">Contact Phone</label>
+                            <input type="tel" id="settingContactPhone" placeholder="+20 xxx xxx xxxx">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-dash-primary" id="settingsSaveBtn">
+                            <i data-lucide="save"></i>
+                            <span data-i18n="dashSave">Save Settings</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Services Module -->
+        <section class="dash-module hidden" id="module-services">
+            <div class="module-header">
+                <h2 data-i18n="dashServices">Services</h2>
+                <button class="btn-dash-primary" id="addServiceBtn">
+                    <i data-lucide="plus"></i>
+                    <span data-i18n="dashAdd">Add New</span>
+                </button>
+            </div>
+            <div class="dash-table-wrapper">
+                <table class="dash-table" id="servicesTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="dashOrder">Order</th>
+                            <th data-i18n="dashTitleCol">Title</th>
+                            <th data-i18n="dashCategory">Category</th>
+                            <th data-i18n="dashPrice">Price</th>
+                            <th data-i18n="dashActive">Active</th>
+                            <th data-i18n="dashActions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="servicesTableBody">
+                    </tbody>
+                </table>
+                <div class="empty-state hidden" id="servicesEmpty">
+                    <i data-lucide="briefcase"></i>
+                    <p data-i18n="dashNoServices">No services found. Add your first service!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Module -->
+        <section class="dash-module hidden" id="module-skills">
+            <div class="module-header">
+                <h2 data-i18n="dashSkills">Skills</h2>
+                <button class="btn-dash-primary" id="addSkillBtn">
+                    <i data-lucide="plus"></i>
+                    <span data-i18n="dashAdd">Add New</span>
+                </button>
+            </div>
+            <div class="dash-table-wrapper">
+                <table class="dash-table" id="skillsTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="dashOrder">Order</th>
+                            <th data-i18n="dashName">Name</th>
+                            <th data-i18n="dashCategory">Category</th>
+                            <th data-i18n="dashLevel">Level</th>
+                            <th data-i18n="dashActive">Active</th>
+                            <th data-i18n="dashActions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="skillsTableBody">
+                    </tbody>
+                </table>
+                <div class="empty-state hidden" id="skillsEmpty">
+                    <i data-lucide="cpu"></i>
+                    <p data-i18n="dashNoSkills">No skills found. Add your first skill!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Module -->
+        <section class="dash-module hidden" id="module-experience">
+            <div class="module-header">
+                <h2 data-i18n="dashExperience">Experience</h2>
+                <button class="btn-dash-primary" id="addExperienceBtn">
+                    <i data-lucide="plus"></i>
+                    <span data-i18n="dashAdd">Add New</span>
+                </button>
+            </div>
+            <div class="dash-table-wrapper">
+                <table class="dash-table" id="experienceTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="dashOrder">Order</th>
+                            <th data-i18n="dashRole">Role</th>
+                            <th data-i18n="dashCompany">Company</th>
+                            <th data-i18n="dashDate">Date</th>
+                            <th data-i18n="dashActive">Active</th>
+                            <th data-i18n="dashActions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="experienceTableBody">
+                    </tbody>
+                </table>
+                <div class="empty-state hidden" id="experienceEmpty">
+                    <i data-lucide="briefcase-business"></i>
+                    <p data-i18n="dashNoExperience">No experience found. Add your first experience item!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificates Module -->
+        <section class="dash-module hidden" id="module-certificates">
+            <div class="module-header">
+                <h2 data-i18n="dashCertificates">Certificates</h2>
+                <button class="btn-dash-primary" id="addCertificateBtn">
+                    <i data-lucide="plus"></i>
+                    <span data-i18n="dashAdd">Add New</span>
+                </button>
+            </div>
+            <div class="dash-table-wrapper">
+                <table class="dash-table" id="certificatesTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="dashOrder">Order</th>
+                            <th data-i18n="dashTitleCol">Title</th>
+                            <th data-i18n="dashIssuer">Issuer</th>
+                            <th data-i18n="dashActive">Active</th>
+                            <th data-i18n="dashActions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="certificatesTableBody">
+                    </tbody>
+                </table>
+                <div class="empty-state hidden" id="certificatesEmpty">
+                    <i data-lucide="award"></i>
+                    <p data-i18n="dashNoCerts">No certificates found. Add your first certificate!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Module -->
+        <section class="dash-module hidden" id="module-education">
+            <div class="module-header">
+                <h2 data-i18n="dashEducation">Education</h2>
+                <button class="btn-dash-primary" id="addEducationBtn">
+                    <i data-lucide="plus"></i>
+                    <span data-i18n="dashAdd">Add New</span>
+                </button>
+            </div>
+            <div class="dash-table-wrapper">
+                <table class="dash-table" id="educationTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="dashOrder">Order</th>
+                            <th data-i18n="dashTitleCol">Title</th>
+                            <th data-i18n="dashInstitution">Institution</th>
+                            <th data-i18n="dashDate">Date</th>
+                            <th data-i18n="dashActive">Active</th>
+                            <th data-i18n="dashActions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="educationTableBody">
+                    </tbody>
+                </table>
+                <div class="empty-state hidden" id="educationEmpty">
+                    <i data-lucide="graduation-cap"></i>
+                    <p data-i18n="dashNoEducation">No education found. Add your first education item!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Module -->
+        <section class="dash-module hidden" id="module-projects">
+            <div class="module-header">
+                <h2 data-i18n="dashProjects">Projects</h2>
+                <button class="btn-dash-primary" id="addProjectBtn">
+                    <i data-lucide="plus"></i>
+                    <span data-i18n="dashAdd">Add New</span>
+                </button>
+            </div>
+            <div class="dash-table-wrapper">
+                <table class="dash-table" id="projectsTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="dashOrder">Order</th>
+                            <th data-i18n="dashTitleCol">Title</th>
+                            <th data-i18n="dashFeatured">Featured</th>
+                            <th data-i18n="dashActive">Active</th>
+                            <th data-i18n="dashActions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projectsTableBody">
+                    </tbody>
+                </table>
+                <div class="empty-state hidden" id="projectsEmpty">
+                    <i data-lucide="folder-open"></i>
+                    <p data-i18n="dashNoProjects">No projects found. Add your first project!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Messages Module -->
+        <section class="dash-module hidden" id="module-messages">
+            <div class="module-header">
+                <h2 data-i18n="dashMessages">Messages</h2>
+            </div>
+            <div class="messages-list" id="messagesList">
+            </div>
+            <div class="empty-state hidden" id="messagesEmpty">
+                <i data-lucide="mail"></i>
+                <p data-i18n="dashNoMessages">No messages yet.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Add/Edit forms -->
+    <div class="dash-modal-overlay" id="dashModal">
+        <div class="dash-modal">
+            <div class="dash-modal-header">
+                <h3 id="modalTitle">Add Item</h3>
+                <button class="dash-modal-close" id="modalClose" aria-label="Close">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="dash-modal-body" id="modalBody">
+                <!-- Dynamic form content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Dialog -->
+    <div class="dash-confirm-overlay" id="confirmDialog" style="display:none;">
+        <div class="dash-confirm">
+            <div class="dash-confirm-icon">
+                <i data-lucide="alert-triangle"></i>
+            </div>
+            <h3 id="confirmTitle" data-i18n="dashConfirmDelete">Confirm Delete</h3>
+            <p id="confirmText" data-i18n="dashConfirmText">Are you sure? This action cannot be undone.</p>
+            <div class="dash-confirm-actions">
+                <button class="btn-dash-secondary" id="confirmCancel" data-i18n="dashCancel">Cancel</button>
+                <button class="btn-dash-danger" id="confirmOk" data-i18n="dashDelete">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Detail Panel -->
+    <div class="message-detail-overlay" id="messageDetailOverlay" style="display:none;">
+        <div class="message-detail-panel">
+            <div class="message-detail-header">
+                <h3 data-i18n="dashMessageDetail">Message Details</h3>
+                <button class="dash-modal-close" id="messageDetailClose" aria-label="Close">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="message-detail-body" id="messageDetailBody">
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script type="module" src="dashboard.js"></script>
+</body>
+
+</html>

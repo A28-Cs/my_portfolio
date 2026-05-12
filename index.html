@@ -416,72 +416,14 @@
     </section>
 
     <!-- Experience Section -->
-    <section class="section experience" id="experience">
+    <section class="section experience section-empty" id="experience">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <span class="section-tag" data-i18n="expTag">&lt;experience&gt;</span>
                 <h2 class="section-title"><span data-i18n="expTitle1">Professional</span> <span class="gradient-text" data-i18n="expTitle2">Experience</span></h2>
                 <div class="section-line"></div>
             </div>
-            <div class="timeline">
-                <div class="timeline-item animate-on-scroll">
-                    <div class="timeline-marker">
-                        <div class="marker-dot"></div>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div class="timeline-title-group">
-                                <h3 data-i18n="exp1Role">Machine Learning Engineering Intern</h3>
-                                <span class="timeline-company">Digital Egypt Pioneers Initiative (DEPI)</span>
-                            </div>
-                            <span class="timeline-date">
-                                <i data-lucide="calendar"></i>
-                                <span data-i18n="exp1Date">Jan 2026 – Present</span>
-                            </span>
-                        </div>
-                        <ul class="timeline-details">
-                            <li data-i18n="exp1Desc1">Designed and implemented end-to-end AI pipelines from preprocessing to deployment</li>
-                            <li data-i18n="exp1Desc2">Developed deep learning models for Computer Vision and NLP applications</li>
-                            <li data-i18n="exp1Desc3">Applied model evaluation, hyperparameter tuning, and optimization techniques</li>
-                            <li data-i18n="exp1Desc4">Managed experiments and model tracking using MLflow</li>
-                        </ul>
-                        <div class="timeline-tags">
-                            <span class="tag">Deep Learning</span>
-                            <span class="tag">Computer Vision</span>
-                            <span class="tag">NLP</span>
-                            <span class="tag">MLflow</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-item animate-on-scroll">
-                    <div class="timeline-marker">
-                        <div class="marker-dot"></div>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <div class="timeline-title-group">
-                                <h3 data-i18n="exp2Role">Data Science Intern</h3>
-                                <span class="timeline-company">almentor</span>
-                            </div>
-                            <span class="timeline-date">
-                                <i data-lucide="calendar"></i>
-                                <span data-i18n="exp2Date">Jun 2025 – Dec 2025</span>
-                            </span>
-                        </div>
-                        <ul class="timeline-details">
-                            <li data-i18n="exp2Desc1">Conducted exploratory data analysis and built predictive machine learning models</li>
-                            <li data-i18n="exp2Desc2">Applied statistical analysis and feature engineering to improve performance</li>
-                            <li data-i18n="exp2Desc3">Delivered structured insights using data visualization and reporting techniques</li>
-                        </ul>
-                        <div class="timeline-tags">
-                            <span class="tag">Data Science</span>
-                            <span class="tag">EDA</span>
-                            <span class="tag">Feature Eng.</span>
-                            <span class="tag">Visualization</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="timeline"></div>
         </div>
     </section>
 
@@ -969,39 +911,12 @@
     </section>
 
     <!-- Education Section -->
-    <section class="section education" id="education">
+    <section class="section education section-empty" id="education">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <span class="section-tag" data-i18n="eduTag">&lt;education&gt;</span>
                 <h2 class="section-title"><span data-i18n="eduTitle1">My</span> <span class="gradient-text" data-i18n="eduTitle2">Education</span></h2>
                 <div class="section-line"></div>
-            </div>
-            <div class="education-card animate-on-scroll">
-                <div class="edu-icon">
-                    <i data-lucide="graduation-cap"></i>
-                </div>
-                <div class="edu-content">
-                    <h3 data-i18n="eduDeg">Bachelor of Technology in Computer Science</h3>
-                    <span class="edu-school">
-                        <i data-lucide="building-2"></i>
-                        <span data-i18n="eduUni">Zagazig University</span>
-                    </span>
-                    <span class="edu-date">
-                        <i data-lucide="calendar"></i>
-                        <span data-i18n="eduDate">Aug 2022 – Expected Jul 2026</span>
-                    </span>
-                    <p class="edu-description" data-i18n="eduDesc">
-                        Specialized in <strong>Computer Science and Artificial Intelligence</strong>.
-                        Focused on deep learning, machine learning algorithms, data structures & algorithms,
-                        and software engineering principles.
-                    </p>
-                    <div class="edu-highlights">
-                        <span>Computer Science</span>
-                        <span>Artificial Intelligence</span>
-                        <span>Deep Learning</span>
-                        <span>Data Structures</span>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -1178,7 +1093,11 @@
         </div>
     </div>
 
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
     <script src="script.js"></script>
+    <script type="module" src="firebase-public.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Ahmed Ismail</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../admin-login.css">
+    <script src="../translations.js"></script>
+</head>
+
+<body>
+    <!-- Background grid effect -->
+    <div class="admin-bg-grid"></div>
+
+    <!-- Login Container -->
+    <div class="admin-login-wrapper">
+        <div class="admin-login-card">
+            <!-- Logo -->
+            <a href="../index.html" class="admin-logo">
+                <span class="logo-bracket">&lt;</span>
+                <span class="logo-text">AI</span>
+                <span class="logo-bracket">/&gt;</span>
+            </a>
+
+            <h1 class="admin-login-title" data-i18n="adminLoginTitle">Admin Portal</h1>
+            <p class="admin-login-subtitle" data-i18n="adminLoginSubtitle">Sign in to access the dashboard</p>
+
+            <!-- Error Message -->
+            <div class="admin-error" id="adminError" style="display: none;">
+                <i data-lucide="alert-circle"></i>
+                <span id="adminErrorText"></span>
+            </div>
+
+            <!-- Login Form -->
+            <form id="adminLoginForm" class="admin-form">
+                <div class="admin-form-group">
+                    <label for="adminEmail" data-i18n="adminEmailLabel">Email Address</label>
+                    <div class="admin-input-wrapper">
+                        <i data-lucide="mail"></i>
+                        <input type="email" id="adminEmail" placeholder="admin@example.com" required autocomplete="email">
+                    </div>
+                </div>
+
+                <div class="admin-form-group">
+                    <label for="adminPassword" data-i18n="adminPasswordLabel">Password</label>
+                    <div class="admin-input-wrapper">
+                        <i data-lucide="lock"></i>
+                        <input type="password" id="adminPassword" placeholder="••••••••" required autocomplete="current-password">
+                        <button type="button" class="password-toggle" id="passwordToggle" aria-label="Toggle password visibility">
+                            <i data-lucide="eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="admin-login-btn" id="adminLoginBtn">
+                    <span data-i18n="adminLoginBtn">Sign In</span>
+                    <i data-lucide="arrow-right"></i>
+                </button>
+            </form>
+
+            <!-- Language Toggle -->
+            <div class="admin-footer-actions">
+                <button class="admin-lang-toggle" id="adminLangToggle">
+                    <i data-lucide="globe"></i>
+                    <span id="adminCurrentLang">EN</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Decorative rings -->
+        <div class="login-ring ring-1"></div>
+        <div class="login-ring ring-2"></div>
+    </div>
+
+    <script>
+        window.adminLoginModuleReady = false;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('adminLoginForm');
+            if (!form) return;
+
+            const showLoadError = () => {
+                const errorDiv = document.getElementById('adminError');
+                const errorText = document.getElementById('adminErrorText');
+                if (!errorDiv || !errorText) return;
+
+                errorDiv.style.display = 'flex';
+                errorText.textContent = location.protocol === 'file:'
+                    ? 'Open this page through a local or deployed web server. ES modules are blocked from file:// pages.'
+                    : 'The login script did not load. Check your connection and refresh the page.';
+            };
+
+            setTimeout(() => {
+                if (window.adminLoginModuleReady) return;
+                form.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    showLoadError();
+                });
+                if (location.protocol === 'file:') showLoadError();
+            }, 1000);
+        });
+    </script>
+    <script type="module" src="../admin-login.js"></script>
+</body>
+
+</html>
