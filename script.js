@@ -184,10 +184,10 @@ function initParticles() {
 
         getColor() {
             const colors = [
-                '185, 103, 81',
-                '216, 160, 111',
-                '200, 121, 69',
-                '216, 216, 216',
+                '195, 108, 78',   // Purple
+                '208, 141, 94',  // Light purple
+                '218, 117, 59',    // Cyan
+                '116, 185, 255',  // Light blue
             ];
             return colors[Math.floor(Math.random() * colors.length)];
         }
