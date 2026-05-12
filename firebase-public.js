@@ -643,7 +643,7 @@ function overrideContactForm() {
 
             // Success
             btn.innerHTML = `<span>${txtSuccess}</span>`;
-            btn.style.background = 'linear-gradient(135deg, #d8a06f, #c87945)';
+            btn.style.background = 'linear-gradient(135deg, #00f5a0, #00d2ff)';
             showToast(isAr ? 'تم إرسال رسالتك بنجاح! سأتواصل معك قريباً.' : 'Your message has been sent! I\'ll get back to you soon.', 'success');
 
             setTimeout(() => {

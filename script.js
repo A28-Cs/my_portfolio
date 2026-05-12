@@ -184,9 +184,9 @@ function initParticles() {
 
         getColor() {
             const colors = [
-                '195, 108, 78',   // Purple
-                '208, 141, 94',  // Light purple
-                '218, 117, 59',    // Cyan
+                '108, 92, 231',   // Purple
+                '162, 155, 254',  // Light purple
+                '0, 210, 255',    // Cyan
                 '116, 185, 255',  // Light blue
             ];
             return colors[Math.floor(Math.random() * colors.length)];
@@ -237,7 +237,7 @@ function initParticles() {
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < 150) {
                     ctx.beginPath();
-                    ctx.strokeStyle = `rgba(185, 103, 81, ${0.08 * (1 - dist / 150)})`;
+                    ctx.strokeStyle = `rgba(108, 92, 231, ${0.08 * (1 - dist / 150)})`;
                     ctx.lineWidth = 0.5;
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
@@ -547,7 +547,7 @@ function initContactForm() {
         .then(data => {
             if (data.success === 'true' || data.success === true) {
                 btn.innerHTML = `<span>${txtSuccess}</span>`;
-                btn.style.background = 'linear-gradient(135deg, #d8a06f, #c87945)';
+                btn.style.background = 'linear-gradient(135deg, #00f5a0, #00d2ff)';
             } else {
                 throw new Error(data.message || 'Form submission returned false');
             }
