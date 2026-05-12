@@ -441,10 +441,10 @@ function initTiltEffect() {
             const y = e.clientY - rect.top;
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
+            const rotateX = (y - centerY) / 55;
+            const rotateY = (centerX - x) / 55;
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+            card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
 
             // Move glow
             const glow = card.querySelector('.project-glow') || card.querySelector('.service-glow');
