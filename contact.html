@@ -218,11 +218,13 @@
 
   .contact-socials { padding-top: 8px; }
   .contact-socials-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 12px; }
-  .social-links { display: flex; gap: 10px; flex-wrap: wrap; }
-  .social-link {
+  .contact-socials .social-links { display: flex; gap: 10px; flex-wrap: wrap; }
+  .contact-socials .social-link {
     display: inline-flex;
     align-items: center;
     gap: 7px;
+    width: auto;
+    height: auto;
     padding: 8px 14px;
     background: var(--surface);
     border: 1px solid var(--border);
@@ -232,8 +234,8 @@
     color: var(--text-secondary);
     transition: all var(--dur-fast) var(--ease);
   }
-  .social-link svg { width: 15px; height: 15px; }
-  .social-link:hover { color: var(--text); border-color: var(--border-hover); background: rgba(255,255,255,0.07); }
+  .contact-socials .social-link svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .contact-socials .social-link:hover { color: var(--text); border-color: var(--border-hover); background: rgba(255,255,255,0.07); }
 </style>
 
 <script type="module" src="/src/scripts/contact.js"></script>

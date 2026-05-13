@@ -259,8 +259,11 @@ input, textarea, select { font-family: var(--font); }
 [dir="rtl"] .skill-chips       { direction: rtl; }
 [dir="rtl"] .skill-chip        { flex-direction: row-reverse; }
 
-/* Code window */
+/* Code window — always LTR (programming code) */
 [dir="rtl"] .code-line         { direction: ltr; text-align: left; }
+[dir="rtl"] .code-window       { direction: ltr; text-align: left; }
+[dir="rtl"] .code-body         { direction: ltr; text-align: left; }
+[dir="rtl"] .code-window-header{ direction: ltr; }
 
 /* Tags */
 [dir="rtl"] .tag               { direction: rtl; }
