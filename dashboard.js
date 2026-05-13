@@ -1,4 +1,4 @@
-import{auth,db,signOut,onAuthStateChanged,checkAdminRole,fetchAllOrdered,fetchSiteSettings,collection,doc,getDoc,getDocs,setDoc,addDoc,updateDoc,deleteDoc,query,orderBy,where,serverTimestamp}from'./firebase-config.js';
+import'/src/scripts/translations.js';import{auth,db,signOut,onAuthStateChanged,checkAdminRole,fetchAllOrdered,fetchSiteSettings,collection,doc,getDoc,getDocs,setDoc,addDoc,updateDoc,deleteDoc,query,orderBy,where,serverTimestamp}from'/src/scripts/firebase-config.js';
 
 let currentLang=localStorage.getItem('lang')||'en';
 const $=id=>document.getElementById(id);

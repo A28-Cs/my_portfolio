@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Ahmed Ismail</title>
+  <meta name="description" content="About Ahmed Ismail – Junior AI Engineer. Skills, background, and tech stack.">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <link rel="stylesheet" href="/src/styles/base.css">
+  <link rel="stylesheet" href="/src/styles/layout.css">
+  <link rel="stylesheet" href="/src/styles/components.css">
+  <link rel="stylesheet" href="/src/styles/animations.css">
+  <link rel="stylesheet" href="/src/styles/about.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Ahmed Ismail</a>
+    <div class="nav-links">
+      <a href="/"              class="nav-link" data-page="home"       data-i18n="navHome">Home</a>
+      <a href="/about.html"    class="nav-link active" data-page="about" data-i18n="navAbout">About</a>
+      <a href="/projects.html" class="nav-link" data-page="projects"   data-i18n="navProjects">Projects</a>
+      <a href="/services.html" class="nav-link" data-page="services"   data-i18n="navServices">Services</a>
+      <a href="/experience.html" class="nav-link" data-page="experience" data-i18n="navExperience">Experience</a>
+      <a href="/contact.html"  class="nav-link" data-page="contact"    data-i18n="navContact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="nav-lang-btn" id="langBtn" aria-label="Toggle language">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span id="langLabel">EN</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<nav class="nav-mobile" id="mobileNav">
+  <a href="/"              class="nav-link" data-i18n="navHome">Home</a>
+  <a href="/about.html"    class="nav-link active" data-i18n="navAbout">About</a>
+  <a href="/projects.html" class="nav-link" data-i18n="navProjects">Projects</a>
+  <a href="/services.html" class="nav-link" data-i18n="navServices">Services</a>
+  <a href="/experience.html" class="nav-link" data-i18n="navExperience">Experience</a>
+  <a href="/contact.html"  class="nav-link" data-i18n="navContact">Contact</a>
+</nav>
+
+<!-- ══ PAGE HEADER ════════════════════════════════════════════ -->
+<div class="page-header">
+  <span class="section-label reveal" data-i18n="aboutLabel">About Me</span>
+  <h1 class="section-title reveal reveal-delay-1" data-i18n="aboutTitle">Crafting Intelligent Systems</h1>
+  <p class="section-subtitle reveal reveal-delay-2" data-i18n="aboutIntro">
+    I'm a <strong>Junior AI Engineer</strong> passionate about building intelligent systems that solve real-world problems.
+  </p>
+</div>
+
+<!-- ══ ABOUT SECTION ══════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Text column -->
+      <div class="about-text reveal">
+        <p class="body-lg" data-i18n="aboutP1">
+          I own the full AI lifecycle — from problem framing and data strategy to modeling, optimization, deployment, and iteration.
+        </p>
+        <p class="body text-muted" data-i18n="aboutP2">
+          I'm experienced in experiment tracking and model lifecycle management using MLflow, and I'm focused on delivering scalable AI systems that create measurable impact.
+        </p>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <div>
+              <span class="info-label" data-i18n="infoDegreeLabel">Degree</span>
+              <span class="info-value" data-i18n="infoDegreeVal">B.Tech in Computer Science</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <div>
+              <span class="info-label" data-i18n="infoFocusLabel">Focus</span>
+              <span class="info-value" data-i18n="infoFocusVal">AI & Deep Learning</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div>
+              <span class="info-label" data-i18n="infoEmailLabel">Email</span>
+              <span class="info-value">ahmed28cs@gmail.com</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <span class="info-label" data-i18n="contactLocLabel">Location</span>
+              <span class="info-value" data-i18n="contactLocVal">Sharkia, Egypt</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="/assets/Ahmed_Ismail_CV.pdf" download="Ahmed_Ismail_CV.pdf" class="btn btn-primary">
+            <span data-i18n="btnCV">Download CV</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </a>
+          <a href="/contact.html" class="btn btn-secondary">
+            <span data-i18n="btnContact">Get in Touch</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Code window column -->
+      <div class="about-visual reveal reveal-delay-2">
+        <div class="code-window">
+          <div class="code-window-header">
+            <span class="code-dot code-dot-red"></span>
+            <span class="code-dot code-dot-yellow"></span>
+            <span class="code-dot code-dot-green"></span>
+            <span class="code-file-name">ahmed_profile.py</span>
+          </div>
+          <pre class="code-body"><code><span class="code-keyword">class</span> <span class="code-class">AhmedIsmail</span>:
+    <span class="code-keyword">def</span> <span class="code-func">__init__</span>(<span class="code-param">self</span>):
+        <span class="code-param">self</span>.name     = <span class="code-string">"Ahmed Ismail"</span>
+        <span class="code-param">self</span>.role     = <span class="code-string">"Jr. AI Engineer"</span>
+        <span class="code-param">self</span>.location = <span class="code-string">"Egypt"</span>
+        <span class="code-param">self</span>.skills   = [
+            <span class="code-string">"Deep Learning"</span>,
+            <span class="code-string">"Computer Vision"</span>,
+            <span class="code-string">"NLP"</span>,
+            <span class="code-string">"MLOps"</span>,
+        ]
+        <span class="code-param">self</span>.open_to_work = <span class="code-bool">True</span>
+
+    <span class="code-keyword">def</span> <span class="code-func">build_ai</span>(<span class="code-param">self</span>):
+        <span class="code-keyword">return</span> <span class="code-string">"Production-ready impact"</span>
+
+<span class="code-param">me</span> = AhmedIsmail()
+<span class="code-comment"># Me.build_ai() → let's connect!</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SKILLS ════════════════════════════════════════════════ -->
+<section class="section" id="skills" style="border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label" data-i18n="skillsLabel">My Expertise</span>
+      <h2 class="section-title" data-i18n="skillsTitle">Tech Stack</h2>
+      <p class="section-subtitle" data-i18n="skillsSubtitle">Tools and technologies I use to build intelligent systems.</p>
+    </div>
+
+    <div class="skills-grid" id="skillsGrid">
+      <!-- Programming -->
+      <div class="skill-category reveal">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <span class="skill-cat-name" data-i18n="skillCat1">Programming</span>
+        </div>
+        <div class="skill-chips">
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" width="18">Python</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" width="18">SQL</span>
+        </div>
+      </div>
+
+      <!-- Machine Learning -->
+      <div class="skill-category reveal reveal-delay-1">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.04z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.04z"/></svg></div>
+          <span class="skill-cat-name" data-i18n="skillCat2">Machine Learning</span>
+        </div>
+        <div class="skill-chips">
+          <span class="skill-chip">Supervised Learning</span>
+          <span class="skill-chip">Unsupervised Learning</span>
+          <span class="skill-chip">Model Evaluation</span>
+          <span class="skill-chip">Optimization</span>
+        </div>
+      </div>
+
+      <!-- Deep Learning -->
+      <div class="skill-category reveal reveal-delay-2">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+          <span class="skill-cat-name" data-i18n="skillCat3">Deep Learning</span>
+        </div>
+        <div class="skill-chips">
+          <span class="skill-chip">CNNs</span>
+          <span class="skill-chip">RNNs</span>
+          <span class="skill-chip">Transformers</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TF" width="18">TensorFlow</span>
+        </div>
+      </div>
+
+      <!-- Data Science -->
+      <div class="skill-category reveal">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+          <span class="skill-cat-name" data-i18n="skillCat4">Data Science</span>
+        </div>
+        <div class="skill-chips">
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy" width="18">NumPy</span>
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas" width="18">Pandas</span>
+          <span class="skill-chip">Matplotlib</span>
+          <span class="skill-chip">Scikit-learn</span>
+          <span class="skill-chip">EDA & Feature Eng.</span>
+        </div>
+      </div>
+
+      <!-- MLOps -->
+      <div class="skill-category reveal reveal-delay-1">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
+          <span class="skill-cat-name" data-i18n="skillCat5">MLOps</span>
+        </div>
+        <div class="skill-chips">
+          <span class="skill-chip">MLflow</span>
+          <span class="skill-chip">Hugging Face</span>
+          <span class="skill-chip">Model Deployment</span>
+          <span class="skill-chip">Monitoring</span>
+        </div>
+      </div>
+
+      <!-- Cloud -->
+      <div class="skill-category reveal reveal-delay-2">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+          <span class="skill-cat-name" data-i18n="skillCat6">Cloud</span>
+        </div>
+        <div class="skill-chips">
+          <span class="skill-chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure" width="18">Azure AI Fundamentals</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">Ahmed Ismail</div>
+    <nav class="footer-links">
+      <a href="/"              class="footer-link" data-i18n="navHome">Home</a>
+      <a href="/about.html"    class="footer-link" data-i18n="navAbout">About</a>
+      <a href="/projects.html" class="footer-link" data-i18n="navProjects">Projects</a>
+      <a href="/services.html" class="footer-link" data-i18n="navServices">Services</a>
+      <a href="/experience.html" class="footer-link" data-i18n="navExperience">Experience</a>
+      <a href="/contact.html"  class="footer-link" data-i18n="navContact">Contact</a>
+    </nav>
+    <p class="footer-copy" data-i18n="footerRights">© 2026 Ahmed Ismail. Built with passion & code.</p>
+  </div>
+</footer>
+
+<div class="toast-container" id="toastContainer"></div>
+<script type="module" src="/src/scripts/about.js"></script>
+</body>
+</html>
