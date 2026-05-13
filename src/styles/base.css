@@ -289,7 +289,20 @@ input, textarea, select { font-family: var(--font); }
 [dir="rtl"] .admin-input-wrapper { flex-direction: row-reverse; }
 [dir="rtl"] .admin-login-card  { text-align: right; }
 
+/* Contact grid — swap columns in RTL */
+[dir="rtl"] .contact-grid { direction: rtl; }
+
+/* Form row — keep natural RTL order */
+[dir="rtl"] .form-row { direction: rtl; }
+
 /* Dashboard sidebar */
 [dir="rtl"] .dash-sidebar      { left: auto; right: 0; }
 [dir="rtl"] .sidebar-link      { flex-direction: row-reverse; text-align: right; }
 [dir="rtl"] .dash-main         { margin-left: 0; margin-right: 240px; }
+
+/* Section headings should center in RTL */
+[dir="rtl"] .exp-section-header { text-align: center; }
+[dir="rtl"] .headline          { text-align: center; }
+
+/* Services note */
+[dir="rtl"] .services-note     { text-align: center; direction: rtl; }

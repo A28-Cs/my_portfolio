@@ -1,8 +1,12 @@
 import { initNav, initReveal } from './nav.js';
 import { fetchActiveOrdered } from './firebase-config.js';
+import translations from './translations.js';
+
+let currentLang = 'en';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  initNav();
+  const nav = initNav();
+  currentLang = nav.getLang();
   initReveal();
   if (typeof lucide !== 'undefined') lucide.createIcons();
 
@@ -12,13 +16,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (_) {}
 });
 
+function t(item, field) {
+  if (currentLang === 'ar' && item[field + 'Ar']) return item[field + 'Ar'];
+  return item[field] || '';
+}
+
 function renderSkills(skills) {
   const grid = document.getElementById('skillsGrid');
   if (!grid) return;
 
   const grouped = {};
   skills.forEach(s => {
-    const cat = s.category || 'Other';
+    const cat = currentLang === 'ar' && s.categoryAr ? s.categoryAr : (s.category || 'Other');
     if (!grouped[cat]) grouped[cat] = [];
     grouped[cat].push(s);
   });
@@ -41,10 +50,11 @@ function renderSkills(skills) {
       </div>
       <div class="skill-chips">
         ${catSkills.map(s => {
+          const name = t(s, 'name');
           const icon = s.iconType === 'image' && s.iconValue
-            ? `<img src="${s.iconValue}" alt="${s.name}" width="18">`
+            ? `<img src="${s.iconValue}" alt="${name}" width="18">`
             : '';
-          return `<span class="skill-chip">${icon}${s.name}</span>`;
+          return `<span class="skill-chip">${icon}${name}</span>`;
         }).join('')}
       </div>
     </div>

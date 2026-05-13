@@ -138,6 +138,8 @@ const translations = {
     formSubj: 'Subject', formSubjHolder: "What's this about?",
     formMsg: 'Message', formMsgHolder: 'Tell me about your project...',
     btnSend: 'Send Message',
+    phName: 'Ahmed Ismail', phEmail: 'hello@example.com',
+    phSubject: 'Project Inquiry', phMessage: 'Tell me about your project...',
 
     /* ── Footer ──────────────────────────────────────────── */
     footerText: 'Crafting intelligent systems, one model at a time.',
@@ -312,6 +314,8 @@ const translations = {
     formSubj: 'الموضوع', formSubjHolder: 'بخصوص ماذا؟',
     formMsg: 'الرسالة', formMsgHolder: 'حدثني عن مشروعك...',
     btnSend: 'إرسال الرسالة',
+    phName: 'أحمد إسماعيل', phEmail: 'hello@example.com',
+    phSubject: 'استفسار عن مشروع', phMessage: 'حدثني عن مشروعك...',
 
     /* ── Footer ──────────────────────────────────────────── */
     footerText: 'أنحت الأنظمة الذكية، نموذجاً تلو الآخر.',
