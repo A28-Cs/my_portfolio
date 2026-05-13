@@ -44,10 +44,10 @@ function renderServices(services, lang) {
     const features = (s.features || []).map((f, fi) => {
       const fAr = s.featuresAr?.[fi];
       const text = (lang === 'ar' && fAr) ? fAr : f;
-      return `<li>${text}</li>`;
+      return `<li dir="auto">${text}</li>`;
     }).join('');
     const isFeatured = s.isFeatured;
-    const priceLabel = s.priceRange || '';
+    const priceLabel = s.priceRange || (s.priceMin && s.priceMax ? `$${s.priceMin}–$${s.priceMax}` : (s.priceMin ? `$${s.priceMin}+` : ''));
     const btnClass = isFeatured ? 'btn btn-primary btn-request' : 'btn btn-secondary btn-request';
 
     return `
@@ -59,8 +59,8 @@ function renderServices(services, lang) {
           </div>
           <span class="service-price">${priceLabel}</span>
         </div>
-        <h3 class="service-title">${title}</h3>
-        <p class="service-desc">${desc}</p>
+        <h3 class="service-title" dir="auto">${title}</h3>
+        <p class="service-desc" dir="auto">${desc}</p>
         ${features ? `<ul class="service-features">${features}</ul>` : ''}
         <button class="${btnClass}" data-title="${t(s, 'title', 'en')}">${btnText}</button>
       </div>`;

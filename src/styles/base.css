@@ -306,3 +306,39 @@ input, textarea, select { font-family: var(--font); }
 
 /* Services note */
 [dir="rtl"] .services-note     { text-align: center; direction: rtl; }
+
+/* ── dir="auto" text direction fix ──────────────────────── */
+/* When English text is inside an RTL container, dir="auto"
+   detects the first strong char and sets direction accordingly.
+   This prevents periods/punctuation from jumping to the wrong side. */
+[dir="rtl"] .project-title[dir="auto"],
+[dir="rtl"] .project-desc[dir="auto"],
+[dir="rtl"] .project-date[dir="auto"],
+[dir="rtl"] .project-feature[dir="auto"],
+[dir="rtl"] .service-title[dir="auto"],
+[dir="rtl"] .service-desc[dir="auto"],
+[dir="rtl"] .timeline-title[dir="auto"],
+[dir="rtl"] .timeline-company[dir="auto"],
+[dir="rtl"] .timeline-date[dir="auto"],
+[dir="rtl"] .timeline-desc[dir="auto"],
+[dir="rtl"] .cert-title[dir="auto"],
+[dir="rtl"] .cert-issuer[dir="auto"] {
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+
+/* Service features list — proper alignment in RTL */
+[dir="rtl"] .service-features li[dir="auto"] {
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+
+/* Project feature with icon — keep icon before text */
+[dir="rtl"] .project-feature[dir="auto"] {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+[dir="rtl"] .project-feature[dir="auto"] svg {
+  flex-shrink: 0;
+}

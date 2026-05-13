@@ -46,9 +46,9 @@ function renderProjects(projects, lang) {
       const fAr = p.featuresAr?.[fi];
       const text = (lang === 'ar' && fAr) ? fAr : f;
       return `
-      <div class="project-feature">
+      <div class="project-feature" dir="auto">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        ${text}
+        <span>${text}</span>
       </div>`;
     }).join('');
     const links = [
@@ -74,9 +74,9 @@ function renderProjects(projects, lang) {
             <div class="project-links-row">${links}</div>
           </div>
         </div>
-        <h3 class="project-title">${title}</h3>
-        ${date ? `<p class="project-date">${date}</p>` : ''}
-        <p class="project-desc">${desc}</p>
+        <h3 class="project-title" dir="auto">${title}</h3>
+        ${date ? `<p class="project-date" dir="auto">${date}</p>` : ''}
+        <p class="project-desc" dir="auto">${desc}</p>
         ${tags ? `<div class="project-tags">${tags}</div>` : ''}
         ${feats ? `<div class="project-features">${feats}</div>` : ''}
       </div>`;

@@ -46,7 +46,7 @@ function renderSkills(skills) {
         <div class="skill-cat-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${iconMap[cat] || defaultIcon}</svg>
         </div>
-        <span class="skill-cat-name">${cat}</span>
+        <span class="skill-cat-name" dir="auto">${cat}</span>
       </div>
       <div class="skill-chips">
         ${catSkills.map(s => {
@@ -54,7 +54,7 @@ function renderSkills(skills) {
           const icon = s.iconType === 'image' && s.iconValue
             ? `<img src="${s.iconValue}" alt="${name}" width="18">`
             : '';
-          return `<span class="skill-chip">${icon}${name}</span>`;
+          return `<span class="skill-chip" dir="auto">${icon}${name}</span>`;
         }).join('')}
       </div>
     </div>

@@ -84,8 +84,8 @@ function renderFeaturedProjects(projects) {
           ${p.isFeatured ? `<span class="badge-dot"></span>${liveLabel}` : doneLabel}
         </span>
       </div>
-      <h3 class="project-title">${t(p, 'title')}</h3>
-      <p class="project-desc">${t(p, 'description')}</p>
+      <h3 class="project-title" dir="auto">${t(p, 'title')}</h3>
+      <p class="project-desc" dir="auto">${t(p, 'description')}</p>
       <div class="project-tags">
         ${(p.tags || []).slice(0, 3).map(tag => `<span class="tag">${tag}</span>`).join('')}
       </div>
