@@ -16,7 +16,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const services = await fetchActiveOrdered('services');
     cachedServices = Array.isArray(services) ? services : [];
     if (cachedServices.length > 0) renderServices(cachedServices, lang);
-  } catch (_) {}
+    else document.getElementById('servicesGrid')?.classList.remove('loading');
+  } catch (_) {
+    document.getElementById('servicesGrid')?.classList.remove('loading');
+  }
 
   window.addEventListener('langchange', (e) => {
     const newLang = e.detail.lang;
@@ -45,6 +48,7 @@ function t(item, field, lang) {
 function renderServices(services, lang) {
   const grid = document.getElementById('servicesGrid');
   if (!grid) return;
+  grid.classList.remove('loading');
 
   const btnText = translations[lang]?.btnRequest || 'Request Service';
   const featuredLabel = translations[lang]?.svcFeaturedLabel || 'Most Requested';
