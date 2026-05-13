@@ -163,3 +163,133 @@ input, textarea, select { font-family: var(--font); }
   clip: rect(0,0,0,0);
   white-space: nowrap;
 }
+
+/* ============================================================
+   RTL — Right-to-left layout adjustments for Arabic
+   Triggered by html[dir="rtl"]
+   ============================================================ */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .text-center { text-align: center; }
+
+/* Flip arrows & directional icons */
+[dir="rtl"] .btn-ghost svg,
+[dir="rtl"] .btn-primary svg,
+[dir="rtl"] .scroll-indicator svg { transform: scaleX(-1); }
+[dir="rtl"] .btn-ghost:hover svg { transform: scaleX(-1) translateX(-3px); }
+
+/* Navbar */
+[dir="rtl"] .nav-inner      { flex-direction: row-reverse; }
+[dir="rtl"] .nav-links       { flex-direction: row-reverse; }
+[dir="rtl"] .nav-actions     { flex-direction: row-reverse; }
+[dir="rtl"] .nav-toggle      { order: -1; }
+
+/* Mobile nav */
+[dir="rtl"] .nav-mobile      { text-align: right; }
+
+/* Footer */
+[dir="rtl"] .footer-inner    { direction: rtl; }
+[dir="rtl"] .footer-links    { direction: rtl; }
+
+/* Page header */
+[dir="rtl"] .page-header     { text-align: center; }
+
+/* Section headers */
+[dir="rtl"] .section-label,
+[dir="rtl"] .section-title,
+[dir="rtl"] .section-subtitle { text-align: center; }
+
+/* Buttons row */
+[dir="rtl"] .hero-buttons    { flex-direction: row-reverse; justify-content: flex-end; }
+
+/* Stats row */
+[dir="rtl"] .hero-stats      { flex-direction: row-reverse; }
+
+/* About grid */
+[dir="rtl"] .about-grid      { direction: rtl; }
+[dir="rtl"] .about-text      { text-align: right; }
+
+/* Info grid items */
+[dir="rtl"] .info-item       { text-align: right; }
+
+/* Project cards */
+[dir="rtl"] .project-card-header { flex-direction: row-reverse; }
+[dir="rtl"] .project-status-wrap { flex-direction: row-reverse; }
+[dir="rtl"] .project-links-row   { flex-direction: row-reverse; }
+[dir="rtl"] .project-tags         { direction: rtl; }
+[dir="rtl"] .project-feature      { flex-direction: row-reverse; text-align: right; }
+[dir="rtl"] .project-feature svg  { margin-left: 8px; margin-right: 0; }
+
+/* Service cards */
+[dir="rtl"] .service-card-header  { flex-direction: row-reverse; }
+[dir="rtl"] .service-features li  { padding-left: 0; padding-right: 18px; }
+[dir="rtl"] .service-features li::before { left: auto; right: 0; }
+[dir="rtl"] .service-featured-label { right: auto; left: -28px; transform: rotate(-35deg); }
+[dir="rtl"] .btn-request          { align-self: flex-end; }
+
+/* Timeline */
+[dir="rtl"] .timeline          { padding-left: 0; padding-right: 28px; }
+[dir="rtl"] .timeline::before  { left: auto; right: 7px; }
+[dir="rtl"] .timeline-dot      { left: auto; right: -25px; }
+[dir="rtl"] .timeline-header   { flex-direction: row-reverse; }
+[dir="rtl"] .timeline-card     { text-align: right; }
+[dir="rtl"] .timeline-tags     { direction: rtl; justify-content: flex-end; }
+
+/* Certificates grid */
+[dir="rtl"] .cert-card         { flex-direction: row-reverse; text-align: right; }
+
+/* Contact grid */
+[dir="rtl"] .contact-grid      { direction: rtl; }
+[dir="rtl"] .contact-form      { text-align: right; }
+[dir="rtl"] .form-label        { text-align: right; }
+[dir="rtl"] .form-input,
+[dir="rtl"] .form-textarea     { text-align: right; direction: rtl; }
+[dir="rtl"] .btn-submit        { align-self: flex-end; }
+
+/* Contact info */
+[dir="rtl"] .contact-info-card { flex-direction: row-reverse; text-align: right; }
+[dir="rtl"] .social-links      { flex-direction: row-reverse; }
+[dir="rtl"] .social-link       { flex-direction: row-reverse; }
+
+/* Skill chips */
+[dir="rtl"] .skill-cat-header  { flex-direction: row-reverse; }
+[dir="rtl"] .skill-chips       { direction: rtl; }
+[dir="rtl"] .skill-chip        { flex-direction: row-reverse; }
+
+/* Code window */
+[dir="rtl"] .code-line         { direction: ltr; text-align: left; }
+
+/* Tags */
+[dir="rtl"] .tag               { direction: rtl; }
+
+/* Badge */
+[dir="rtl"] .badge             { flex-direction: row-reverse; }
+
+/* Hero section */
+[dir="rtl"] .hero-container    { direction: rtl; }
+[dir="rtl"] .hero-content      { text-align: right; }
+[dir="rtl"] .hero-badge        { flex-direction: row-reverse; }
+
+/* Toast — always LTR */
+[dir="rtl"] .toast             { flex-direction: row-reverse; }
+
+/* Floating badges */
+[dir="rtl"] .floating-badge    { direction: rtl; }
+
+/* Home grids */
+[dir="rtl"] .home-projects-grid,
+[dir="rtl"] .home-service-grid { direction: rtl; }
+
+/* Admin login form */
+[dir="rtl"] .admin-form        { text-align: right; }
+[dir="rtl"] .admin-form-group label { text-align: right; }
+[dir="rtl"] .admin-input-wrapper { flex-direction: row-reverse; }
+[dir="rtl"] .admin-login-card  { text-align: right; }
+
+/* Dashboard sidebar */
+[dir="rtl"] .dash-sidebar      { left: auto; right: 0; }
+[dir="rtl"] .sidebar-link      { flex-direction: row-reverse; text-align: right; }
+[dir="rtl"] .dash-main         { margin-left: 0; margin-right: 240px; }
