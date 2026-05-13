@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience | Ahmed Ismail</title>
+  <meta name="description" content="Work experience, education, and certificates of Ahmed Ismail – AI Engineer.">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <link rel="stylesheet" href="/src/styles/base.css">
+  <link rel="stylesheet" href="/src/styles/layout.css">
+  <link rel="stylesheet" href="/src/styles/components.css">
+  <link rel="stylesheet" href="/src/styles/animations.css">
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Ahmed Ismail</a>
+    <div class="nav-links">
+      <a href="/"              class="nav-link" data-i18n="navHome">Home</a>
+      <a href="/about.html"    class="nav-link" data-i18n="navAbout">About</a>
+      <a href="/projects.html" class="nav-link" data-i18n="navProjects">Projects</a>
+      <a href="/services.html" class="nav-link" data-i18n="navServices">Services</a>
+      <a href="/experience.html" class="nav-link active" data-i18n="navExperience">Experience</a>
+      <a href="/contact.html"  class="nav-link" data-i18n="navContact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="nav-lang-btn" id="langBtn" aria-label="Toggle language">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span id="langLabel">EN</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<nav class="nav-mobile" id="mobileNav">
+  <a href="/" class="nav-link" data-i18n="navHome">Home</a>
+  <a href="/about.html" class="nav-link" data-i18n="navAbout">About</a>
+  <a href="/projects.html" class="nav-link" data-i18n="navProjects">Projects</a>
+  <a href="/services.html" class="nav-link" data-i18n="navServices">Services</a>
+  <a href="/experience.html" class="nav-link active" data-i18n="navExperience">Experience</a>
+  <a href="/contact.html" class="nav-link" data-i18n="navContact">Contact</a>
+</nav>
+
+<div class="page-header">
+  <span class="section-label reveal" data-i18n="expLabel">Background</span>
+  <h1 class="section-title reveal reveal-delay-1" data-i18n="expTitle">Experience</h1>
+  <p class="section-subtitle reveal reveal-delay-2" data-i18n="expSubtitle">My journey through work, education, and continuous learning.</p>
+</div>
+
+<!-- Work Experience -->
+<section class="section">
+  <div class="container">
+    <div class="exp-section-header reveal">
+      <h2 class="headline" data-i18n="expWorkTitle">Work Experience</h2>
+    </div>
+    <div class="timeline" id="experienceTimeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <h3 class="timeline-title" data-i18n="exp1Role">AI Engineer Intern</h3>
+              <p class="timeline-company" data-i18n="exp1Company">Freelance / Self-Directed</p>
+            </div>
+            <span class="timeline-date" data-i18n="exp1Date">2024 – Present</span>
+          </div>
+          <p class="timeline-desc" data-i18n="exp1Desc">Developed end-to-end AI solutions including computer vision applications, NLP systems, and ML pipelines. Delivered projects for clients across healthcare, agriculture, and media domains.</p>
+          <div class="timeline-tags">
+            <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">FastAPI</span><span class="tag">Flutter</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <h3 class="timeline-title" data-i18n="exp2Role">AI Instructor</h3>
+              <p class="timeline-company" data-i18n="exp2Company">Zagazig University – Engineering Faculty</p>
+            </div>
+            <span class="timeline-date" data-i18n="exp2Date">2025 – Present</span>
+          </div>
+          <p class="timeline-desc" data-i18n="exp2Desc">Designed and delivered AI and data science workshops for engineering students. Topics covered: machine learning fundamentals, deep learning with PyTorch, and practical project development.</p>
+          <div class="timeline-tags">
+            <span class="tag">Teaching</span><span class="tag">PyTorch</span><span class="tag">Data Science</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="section" style="border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="exp-section-header reveal">
+      <h2 class="headline" data-i18n="expEduTitle">Education</h2>
+    </div>
+    <div class="timeline" id="educationTimeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <h3 class="timeline-title" data-i18n="edu1Degree">B.Sc. Computer Science</h3>
+              <p class="timeline-company" data-i18n="edu1School">Zagazig University – Faculty of Computers and Artificial Intelligence</p>
+            </div>
+            <span class="timeline-date" data-i18n="edu1Date">2022 – 2026</span>
+          </div>
+          <p class="timeline-desc" data-i18n="edu1Desc">Specializing in Artificial Intelligence. Coursework includes machine learning, deep learning, computer vision, natural language processing, data structures, and software engineering.</p>
+          <div class="timeline-tags">
+            <span class="tag">AI Specialization</span><span class="tag">GPA: 3.4+</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Certificates -->
+<section class="section" style="border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="exp-section-header reveal">
+      <h2 class="headline" data-i18n="expCertTitle">Certificates</h2>
+    </div>
+    <div class="certs-grid" id="certsGrid">
+
+      <div class="cert-card reveal">
+        <div class="cert-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div class="cert-body">
+          <h4 class="cert-title" data-i18n="cert1Title">Machine Learning Specialization</h4>
+          <p class="cert-issuer" data-i18n="cert1Issuer">DeepLearning.AI · Coursera</p>
+          <span class="cert-date" data-i18n="cert1Date">2024</span>
+        </div>
+      </div>
+
+      <div class="cert-card reveal reveal-delay-1">
+        <div class="cert-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div class="cert-body">
+          <h4 class="cert-title" data-i18n="cert2Title">Deep Learning Specialization</h4>
+          <p class="cert-issuer" data-i18n="cert2Issuer">DeepLearning.AI · Coursera</p>
+          <span class="cert-date" data-i18n="cert2Date">2024</span>
+        </div>
+      </div>
+
+      <div class="cert-card reveal reveal-delay-2">
+        <div class="cert-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div class="cert-body">
+          <h4 class="cert-title" data-i18n="cert3Title">TensorFlow Developer</h4>
+          <p class="cert-issuer" data-i18n="cert3Issuer">DeepLearning.AI · Coursera</p>
+          <span class="cert-date" data-i18n="cert3Date">2024</span>
+        </div>
+      </div>
+
+      <div class="cert-card reveal">
+        <div class="cert-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div class="cert-body">
+          <h4 class="cert-title" data-i18n="cert4Title">Natural Language Processing</h4>
+          <p class="cert-issuer" data-i18n="cert4Issuer">DeepLearning.AI · Coursera</p>
+          <span class="cert-date" data-i18n="cert4Date">2024</span>
+        </div>
+      </div>
+
+      <div class="cert-card reveal reveal-delay-1">
+        <div class="cert-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div class="cert-body">
+          <h4 class="cert-title" data-i18n="cert5Title">Computer Vision</h4>
+          <p class="cert-issuer" data-i18n="cert5Issuer">DeepLearning.AI · Coursera</p>
+          <span class="cert-date" data-i18n="cert5Date">2024</span>
+        </div>
+      </div>
+
+      <div class="cert-card reveal reveal-delay-2">
+        <div class="cert-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div class="cert-body">
+          <h4 class="cert-title" data-i18n="cert6Title">MLOps Specialization</h4>
+          <p class="cert-issuer" data-i18n="cert6Issuer">DeepLearning.AI · Coursera</p>
+          <span class="cert-date" data-i18n="cert6Date">2025</span>
+        </div>
+      </div>
+
+      <div class="cert-card reveal">
+        <div class="cert-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div class="cert-body">
+          <h4 class="cert-title" data-i18n="cert7Title">AWS Cloud Practitioner</h4>
+          <p class="cert-issuer" data-i18n="cert7Issuer">Amazon Web Services</p>
+          <span class="cert-date" data-i18n="cert7Date">2025</span>
+        </div>
+      </div>
+
+      <div class="cert-card reveal reveal-delay-1">
+        <div class="cert-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div class="cert-body">
+          <h4 class="cert-title" data-i18n="cert8Title">Data Science Professional</h4>
+          <p class="cert-issuer" data-i18n="cert8Issuer">IBM · Coursera</p>
+          <span class="cert-date" data-i18n="cert8Date">2025</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">Ahmed Ismail</div>
+    <nav class="footer-links">
+      <a href="/" class="footer-link" data-i18n="navHome">Home</a>
+      <a href="/about.html" class="footer-link" data-i18n="navAbout">About</a>
+      <a href="/projects.html" class="footer-link" data-i18n="navProjects">Projects</a>
+      <a href="/services.html" class="footer-link" data-i18n="navServices">Services</a>
+      <a href="/experience.html" class="footer-link" data-i18n="navExperience">Experience</a>
+      <a href="/contact.html" class="footer-link" data-i18n="navContact">Contact</a>
+    </nav>
+    <p class="footer-copy" data-i18n="footerRights">© 2026 Ahmed Ismail. Built with passion & code.</p>
+  </div>
+</footer>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<style>
+  .exp-section-header { margin-bottom: 36px; }
+
+  /* Timeline */
+  .timeline { display: flex; flex-direction: column; gap: 0; position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+  .timeline-item { position: relative; padding-bottom: 32px; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot {
+    position: absolute;
+    left: -25px;
+    top: 8px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .timeline-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: border-color var(--dur-fast) var(--ease);
+  }
+  .timeline-card:hover { border-color: var(--border-hover); }
+  .timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .timeline-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 4px;
+    letter-spacing: -0.02em;
+  }
+  .timeline-company {
+    font-size: 13px;
+    color: var(--accent);
+    margin: 0;
+    font-weight: 500;
+  }
+  .timeline-date {
+    font-size: 12px;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 3px 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .timeline-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin: 0;
+  }
+  .timeline-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  /* Certificates */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 1100px) { .certs-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px)  { .certs-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px)  { .certs-grid { grid-template-columns: 1fr; } }
+
+  .cert-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: transform var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  }
+  .cert-card:hover { transform: translateY(-3px); border-color: var(--border-hover); }
+  .cert-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    background: rgba(0,113,227,0.12);
+    border-radius: var(--r-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cert-icon svg { width: 18px; height: 18px; color: var(--accent); }
+  .cert-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .cert-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+  }
+  .cert-issuer {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+  .cert-date {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+</style>
+
+<script type="module" src="/src/scripts/experience.js"></script>
+</body>
+</html>
