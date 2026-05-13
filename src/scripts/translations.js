@@ -141,6 +141,12 @@ const translations = {
     phName: 'Ahmed Ismail', phEmail: 'hello@example.com',
     phSubject: 'Project Inquiry', phMessage: 'Tell me about your project...',
 
+    /* ── CTA Sections ───────────────────────────────────── */
+    ctaHomeTitle: 'Ready to build something<br><span class="text-accent">intelligent?</span>',
+    ctaHomeDesc: "Let's turn your idea into a production-ready AI system.",
+    ctaProjTitle: 'Have a project in mind?',
+    ctaProjDesc: "Let's turn your idea into a production-ready AI system.",
+
     /* ── Footer ──────────────────────────────────────────── */
     footerText: 'Crafting intelligent systems, one model at a time.',
     footerRights: '© 2026 Ahmed Ismail. Built with passion & code.',
@@ -316,6 +322,12 @@ const translations = {
     btnSend: 'إرسال الرسالة',
     phName: 'أحمد إسماعيل', phEmail: 'hello@example.com',
     phSubject: 'استفسار عن مشروع', phMessage: 'حدثني عن مشروعك...',
+
+    /* ── CTA Sections ───────────────────────────────────── */
+    ctaHomeTitle: 'مستعد لبناء شيء<br><span class="text-accent">ذكي؟</span>',
+    ctaHomeDesc: 'دعنا نحوّل فكرتك إلى نظام ذكاء اصطناعي جاهز للإنتاج.',
+    ctaProjTitle: 'عندك فكرة مشروع؟',
+    ctaProjDesc: 'دعنا نحوّل فكرتك إلى نظام ذكاء اصطناعي جاهز للإنتاج.',
 
     /* ── Footer ──────────────────────────────────────────── */
     footerText: 'أنحت الأنظمة الذكية، نموذجاً تلو الآخر.',
