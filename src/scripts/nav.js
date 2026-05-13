@@ -67,6 +67,8 @@ export function initNav() {
       const key = el.getAttribute('data-i18n-ph');
       if (t[key] !== undefined) el.placeholder = t[key];
     });
+    // Notify page scripts to re-render dynamic (Firebase) content
+    window.dispatchEvent(new CustomEvent('langchange', { detail: { lang: l } }));
   }
 
   return { getLang: () => lang };

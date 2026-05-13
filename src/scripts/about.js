@@ -3,6 +3,7 @@ import { fetchActiveOrdered } from './firebase-config.js';
 import translations from './translations.js';
 
 let currentLang = 'en';
+let cachedSkills = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
   const nav = initNav();
@@ -12,8 +13,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
     const skills = await fetchActiveOrdered('skills');
-    if (Array.isArray(skills) && skills.length > 0) renderSkills(skills);
+    cachedSkills = Array.isArray(skills) ? skills : [];
+    if (cachedSkills.length > 0) renderSkills(cachedSkills);
   } catch (_) {}
+
+  window.addEventListener('langchange', (e) => {
+    currentLang = e.detail.lang;
+    if (cachedSkills.length > 0) renderSkills(cachedSkills);
+  });
 });
 
 function t(item, field) {
@@ -41,7 +48,7 @@ function renderSkills(skills) {
   const defaultIcon = '<circle cx="12" cy="12" r="10"/>';
 
   grid.innerHTML = Object.entries(grouped).map(([cat, catSkills], i) => `
-    <div class="skill-category reveal${i % 3 !== 0 ? ` reveal-delay-${i % 3}` : ''}">
+    <div class="skill-category reveal visible${i % 3 !== 0 ? ` reveal-delay-${i % 3}` : ''}">
       <div class="skill-cat-header">
         <div class="skill-cat-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${iconMap[cat] || defaultIcon}</svg>
