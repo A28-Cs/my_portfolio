@@ -2,6 +2,11 @@ import { initNav, initReveal } from './nav.js';
 import { fetchActiveOrdered } from './firebase-config.js';
 import translations from './translations.js';
 
+// Cache Firebase data for language switching without re-fetch
+let cachedExperiences = [];
+let cachedEducations = [];
+let cachedCerts = [];
+
 document.addEventListener('DOMContentLoaded', async () => {
   const nav = initNav();
   initReveal();
@@ -13,12 +18,24 @@ document.addEventListener('DOMContentLoaded', async () => {
       fetchActiveOrdered('education'),
       fetchActiveOrdered('certificates'),
     ]);
+    cachedExperiences = experiences || [];
+    cachedEducations = educations || [];
+    cachedCerts = certs || [];
     const lang = nav.getLang();
-    if (Array.isArray(experiences) && experiences.length > 0) renderTimeline('experienceTimeline', experiences, lang);
-    if (Array.isArray(educations) && educations.length > 0) renderTimeline('educationTimeline', educations, lang);
-    if (Array.isArray(certs) && certs.length > 0) renderCerts(certs, lang);
+    renderAll(lang);
   } catch (_) {}
+
+  // Re-render when language changes (no reload needed)
+  window.addEventListener('langchange', (e) => {
+    renderAll(e.detail.lang);
+  });
 });
+
+function renderAll(lang) {
+  if (cachedExperiences.length > 0) renderTimeline('experienceTimeline', cachedExperiences, lang);
+  if (cachedEducations.length > 0) renderTimeline('educationTimeline', cachedEducations, lang);
+  if (cachedCerts.length > 0) renderCerts(cachedCerts, lang);
+}
 
 function t(item, field, lang) {
   if (lang === 'ar' && item[field + 'Ar']) return item[field + 'Ar'];
@@ -37,7 +54,7 @@ function renderTimeline(containerId, items, lang) {
     const desc = t(item, 'description', lang);
     const tags = (item.tags || []).map(tag => `<span class="tag">${tag}</span>`).join('');
     return `
-      <div class="timeline-item reveal ${delays[i % 3]}">
+      <div class="timeline-item reveal visible ${delays[i % 3]}">
         <div class="timeline-dot"></div>
         <div class="timeline-card">
           <div class="timeline-header">
@@ -62,7 +79,7 @@ function renderCerts(certs, lang) {
 
   const delays = ['', 'reveal-delay-1', 'reveal-delay-2'];
   grid.innerHTML = certs.map((c, i) => `
-    <div class="cert-card reveal ${delays[i % 3]}">
+    <div class="cert-card reveal visible ${delays[i % 3]}">
       <div class="cert-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
       </div>
@@ -80,5 +97,5 @@ function attachReveal(container) {
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.1 });
-  container.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  container.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
 }

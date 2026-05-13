@@ -2,14 +2,34 @@ import { initNav, initReveal, showToast } from './nav.js';
 import { fetchActiveOrdered } from './firebase-config.js';
 import translations from './translations.js';
 
+let cachedServices = [];
+
 document.addEventListener('DOMContentLoaded', async () => {
   const nav = initNav();
   initReveal();
   if (typeof lucide !== 'undefined') lucide.createIcons();
 
   const lang = nav.getLang();
-  const btnText = translations[lang]?.btnRequest || 'Request Service';
+  updateStaticButtons(lang);
 
+  try {
+    const services = await fetchActiveOrdered('services');
+    cachedServices = Array.isArray(services) ? services : [];
+    if (cachedServices.length > 0) renderServices(cachedServices, lang);
+    else document.getElementById('servicesGrid')?.classList.remove('loading');
+  } catch (_) {
+    document.getElementById('servicesGrid')?.classList.remove('loading');
+  }
+
+  window.addEventListener('langchange', (e) => {
+    const newLang = e.detail.lang;
+    updateStaticButtons(newLang);
+    if (cachedServices.length > 0) renderServices(cachedServices, newLang);
+  });
+});
+
+function updateStaticButtons(lang) {
+  const btnText = translations[lang]?.btnRequest || 'Request Service';
   document.querySelectorAll('.btn-request').forEach(btn => {
     btn.textContent = btnText;
     btn.addEventListener('click', () => {
@@ -18,12 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       window.location.href = `/contact.html?subject=${subject}`;
     });
   });
-
-  try {
-    const services = await fetchActiveOrdered('services');
-    if (Array.isArray(services) && services.length > 0) renderServices(services, lang);
-  } catch (_) {}
-});
+}
 
 function t(item, field, lang) {
   if (lang === 'ar' && item[field + 'Ar']) return item[field + 'Ar'];
@@ -33,6 +48,7 @@ function t(item, field, lang) {
 function renderServices(services, lang) {
   const grid = document.getElementById('servicesGrid');
   if (!grid) return;
+  grid.classList.remove('loading');
 
   const btnText = translations[lang]?.btnRequest || 'Request Service';
   const featuredLabel = translations[lang]?.svcFeaturedLabel || 'Most Requested';
@@ -51,7 +67,7 @@ function renderServices(services, lang) {
     const btnClass = isFeatured ? 'btn btn-primary btn-request' : 'btn btn-secondary btn-request';
 
     return `
-      <div class="service-card ${isFeatured ? 'service-card-featured' : ''} reveal ${delays[i % 3]}">
+      <div class="service-card ${isFeatured ? 'service-card-featured' : ''} reveal visible ${delays[i % 3]}">
         ${isFeatured ? `<div class="service-featured-label">${featuredLabel}</div>` : ''}
         <div class="service-card-header">
           <div class="service-icon">
@@ -77,7 +93,7 @@ function renderServices(services, lang) {
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.1 });
-  grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  grid.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
 
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }

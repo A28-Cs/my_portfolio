@@ -2,6 +2,8 @@ import { initNav, initReveal } from './nav.js';
 import { fetchActiveOrdered } from './firebase-config.js';
 import translations from './translations.js';
 
+let cachedProjects = [];
+
 document.addEventListener('DOMContentLoaded', async () => {
   const nav = initNav();
   initReveal();
@@ -9,9 +11,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
     const projects = await fetchActiveOrdered('projects');
+    cachedProjects = Array.isArray(projects) ? projects : [];
     const lang = nav.getLang();
-    if (Array.isArray(projects) && projects.length > 0) renderProjects(projects, lang);
+    if (cachedProjects.length > 0) renderProjects(cachedProjects, lang);
   } catch (_) {}
+
+  window.addEventListener('langchange', (e) => {
+    if (cachedProjects.length > 0) renderProjects(cachedProjects, e.detail.lang);
+  });
 });
 
 function t(item, field, lang) {
@@ -61,7 +68,7 @@ function renderProjects(projects, lang) {
       : '';
 
     return `
-      <div class="project-card reveal ${delays[i % 3] || ''}">
+      <div class="project-card reveal visible ${delays[i % 3] || ''}">
         ${imgHtml}
         <div class="project-card-header">
           <div class="project-icon">
@@ -85,7 +92,7 @@ function renderProjects(projects, lang) {
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.1 });
-  grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  grid.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
 
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }

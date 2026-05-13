@@ -3,6 +3,7 @@ import { fetchActiveOrdered, fetchSiteSettings } from './firebase-config.js';
 import translations from './translations.js';
 
 let currentLang = 'en';
+let cachedProjects = [];
 
 document.addEventListener('DOMContentLoaded', () => {
   const nav = initNav();
@@ -37,6 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   loadFeaturedProjects();
+
+  // Re-render when language changes
+  window.addEventListener('langchange', (e) => {
+    currentLang = e.detail.lang;
+    if (cachedProjects.length > 0) renderFeaturedProjects(cachedProjects);
+  });
 });
 
 function t(item, field) {
@@ -61,7 +68,8 @@ async function loadFeaturedProjects() {
     }
 
     if (Array.isArray(projects) && projects.length > 0) {
-      renderFeaturedProjects(projects.slice(0, 3));
+      cachedProjects = projects.slice(0, 3);
+      renderFeaturedProjects(cachedProjects);
     }
   } catch (_) {}
 }
@@ -75,7 +83,7 @@ function renderFeaturedProjects(projects) {
   const delays = ['', 'reveal-delay-1', 'reveal-delay-2'];
 
   grid.innerHTML = projects.map((p, i) => `
-    <div class="project-card reveal ${delays[i] || ''}">
+    <div class="project-card reveal visible ${delays[i] || ''}">
       <div class="project-card-header">
         <div class="project-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
@@ -95,7 +103,7 @@ function renderFeaturedProjects(projects) {
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.1 });
-  grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  grid.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
 
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }

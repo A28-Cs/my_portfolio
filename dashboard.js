@@ -302,7 +302,7 @@ lucide?.createIcons();
 function renderRow(type,item){
 const acts=`<td class="actions-cell"><button class="btn-icon btn-edit" data-id="${item.id}"><i data-lucide="edit-3"></i></button><button class="btn-icon danger btn-delete" data-id="${item.id}"><i data-lucide="trash-2"></i></button></td>`;
 const toggle=(field,val,id)=>`<td><label class="toggle-switch"><input type="checkbox" ${val?'checked':''} data-id="${id}" data-field="${field}"><span class="toggle-slider"></span></label></td>`;
-if(type==='services')return`<tr><td>${item.order||0}</td><td>${item.title||''}</td><td>${item.category||''}</td><td>$${item.priceMin||0}–$${item.priceMax||0}</td>${toggle('isActive',item.isActive,item.id)}${acts}</tr>`;
+if(type==='services')return`<tr><td>${item.order||0}</td><td>${item.title||''}</td><td>${item.category||''}</td><td>$${item.priceMin||0}–$${item.priceMax||0}</td>${toggle('isFeatured',item.isFeatured,item.id)}${toggle('isActive',item.isActive,item.id)}${acts}</tr>`;
 if(type==='skills')return`<tr><td>${item.order||0}</td><td>${item.name||''}</td><td>${item.category||''}</td><td>${item.level||0}%</td>${toggle('isActive',item.isActive,item.id)}${acts}</tr>`;
 if(type==='experience')return`<tr><td>${item.order||0}</td><td>${item.role||''}</td><td>${item.company||''}</td><td>${item.date||''}</td>${toggle('isActive',item.isActive,item.id)}${acts}</tr>`;
 if(type==='certificates')return`<tr><td>${item.order||0}</td><td>${item.title||''}</td><td>${item.issuer||''}</td>${toggle('isActive',item.isActive,item.id)}${acts}</tr>`;
@@ -364,7 +364,8 @@ ${arSection()}
 <div class="form-group"><label>الوصف (Description Arabic)</label><textarea name="descriptionAr" dir="rtl">${escapeHTML(v('descriptionAr'))}</textarea></div>
 <div class="form-group"><label>المميزات (Features Arabic, comma separated)</label><input name="featuresAr" value="${escapeHTML((v('featuresAr',[])).join(', '))}" dir="rtl"></div>
 <div class="form-row"><div class="form-group"><label>Order</label><input type="number" name="order" value="${v('order',0)}"></div>
-<div class="form-group"><label class="form-check"><input type="checkbox" name="isActive" ${chk('isActive')}> Active</label></div></div>
+<div class="form-group"><div class="form-check" style="margin-top:24px"><input type="checkbox" name="isFeatured" ${chk('isFeatured',false)}><label>Most Requested (الأكثر طلبًا)</label></div>
+<div class="form-check"><input type="checkbox" name="isActive" ${chk('isActive')}><label>Active</label></div></div></div>
 <div class="form-actions"><button type="submit" class="btn-dash-primary"><i data-lucide="save"></i><span>Save</span></button></div></form>`;
 if(type==='skills')return`<form>
 <div class="form-group"><label>Name (English)</label><input name="name" value="${escapeHTML(v('name'))}" required></div>
@@ -448,7 +449,7 @@ const num=k=>parseInt(fd.get(k))||0;
 const bool=k=>form.querySelector(`[name="${k}"]`)?.checked||false;
 const arr=k=>(fd.get(k)||'').split(',').map(s=>s.trim()).filter(Boolean);
 const lines=k=>(fd.get(k)||'').split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
-if(type==='services')return{title:str('title'),titleAr:str('titleAr'),category:str('category'),categoryAr:str('categoryAr'),description:str('description'),descriptionAr:str('descriptionAr'),icon:str('icon'),features:arr('features'),featuresAr:arr('featuresAr'),priceMin:num('priceMin'),priceMax:num('priceMax'),order:num('order'),isActive:bool('isActive')};
+if(type==='services')return{title:str('title'),titleAr:str('titleAr'),category:str('category'),categoryAr:str('categoryAr'),description:str('description'),descriptionAr:str('descriptionAr'),icon:str('icon'),features:arr('features'),featuresAr:arr('featuresAr'),priceMin:num('priceMin'),priceMax:num('priceMax'),order:num('order'),isFeatured:bool('isFeatured'),isActive:bool('isActive')};
 if(type==='skills')return{name:str('name'),nameAr:str('nameAr'),category:str('category'),categoryAr:str('categoryAr'),iconType:str('iconType'),iconValue:str('iconValue'),level:num('level'),order:num('order'),isActive:bool('isActive')};
 if(type==='experience')return{role:str('role'),roleAr:str('roleAr'),company:str('company'),companyAr:str('companyAr'),date:str('date'),dateAr:str('dateAr'),description:str('description'),descriptionAr:str('descriptionAr'),tags:arr('tags'),order:num('order'),isActive:bool('isActive')};
 if(type==='certificates')return{title:str('title'),titleAr:str('titleAr'),issuer:str('issuer'),issuerAr:str('issuerAr'),issueDate:str('issueDate'),credentialId:str('credentialId'),imageUrl:str('imageUrl'),verifyUrl:str('verifyUrl'),order:num('order'),isActive:bool('isActive')};
