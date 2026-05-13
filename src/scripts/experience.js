@@ -42,12 +42,12 @@ function renderTimeline(containerId, items, lang) {
         <div class="timeline-card">
           <div class="timeline-header">
             <div>
-              <h3 class="timeline-title">${title}</h3>
-              <p class="timeline-company">${org}</p>
+              <h3 class="timeline-title" dir="auto">${title}</h3>
+              <p class="timeline-company" dir="auto">${org}</p>
             </div>
-            <span class="timeline-date">${date}</span>
+            <span class="timeline-date" dir="auto">${date}</span>
           </div>
-          ${desc ? `<p class="timeline-desc">${desc}</p>` : ''}
+          ${desc ? `<p class="timeline-desc" dir="auto">${desc}</p>` : ''}
           ${tags ? `<div class="timeline-tags">${tags}</div>` : ''}
         </div>
       </div>`;
@@ -67,8 +67,8 @@ function renderCerts(certs, lang) {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
       </div>
       <div class="cert-body">
-        <h4 class="cert-title">${t(c, 'title', lang)}</h4>
-        <p class="cert-issuer">${t(c, 'issuer', lang)}</p>
+        <h4 class="cert-title" dir="auto">${t(c, 'title', lang)}</h4>
+        <p class="cert-issuer" dir="auto">${t(c, 'issuer', lang)}</p>
         ${c.date ? `<span class="cert-date">${c.date}</span>` : ''}
       </div>
     </div>`).join('');

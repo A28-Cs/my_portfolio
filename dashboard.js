@@ -342,67 +342,98 @@ finally{setFormSubmitting(form,false)}
 lucide?.createIcons();
 }
 
+function arSection(){
+return`<div class="form-section-divider"><span>Arabic Translation (العربية)</span></div>`;
+}
+
 function getFormHTML(type,d){
 d=d||{};
 const v=(k,def='')=>d[k]!=null?d[k]:def;
 const chk=(k,def=k==='isActive')=>v(k,def)?'checked':'';
 if(type==='services')return`<form>
-<div class="form-group"><label>Title</label><input name="title" value="${v('title')}" required></div>
-<div class="form-group"><label>Category</label><input name="category" value="${v('category')}"></div>
-<div class="form-group"><label>Description</label><textarea name="description">${v('description')}</textarea></div>
-<div class="form-group"><label>Icon (Lucide name)</label><input name="icon" value="${v('icon')}"><span class="helper-text">e.g. brain-circuit, shopping-bag</span></div>
-<div class="form-group"><label>Features (comma separated)</label><input name="features" value="${(v('features',[])).join(', ')}"></div>
+<div class="form-group"><label>Title (English)</label><input name="title" value="${escapeHTML(v('title'))}" required></div>
+<div class="form-group"><label>Category</label><input name="category" value="${escapeHTML(v('category'))}"></div>
+<div class="form-group"><label>Description (English)</label><textarea name="description">${escapeHTML(v('description'))}</textarea></div>
+<div class="form-group"><label>Icon (Lucide name)</label><input name="icon" value="${escapeHTML(v('icon'))}"><span class="helper-text">e.g. brain-circuit, shopping-bag</span></div>
+<div class="form-group"><label>Features (English, comma separated)</label><input name="features" value="${escapeHTML((v('features',[])).join(', '))}"></div>
 <div class="form-row"><div class="form-group"><label>Price Min ($)</label><input type="number" name="priceMin" value="${v('priceMin',0)}"></div>
 <div class="form-group"><label>Price Max ($)</label><input type="number" name="priceMax" value="${v('priceMax',0)}"></div></div>
+${arSection()}
+<div class="form-group"><label>العنوان (Title Arabic)</label><input name="titleAr" value="${escapeHTML(v('titleAr'))}" dir="rtl"></div>
+<div class="form-group"><label>التصنيف (Category Arabic)</label><input name="categoryAr" value="${escapeHTML(v('categoryAr'))}" dir="rtl"></div>
+<div class="form-group"><label>الوصف (Description Arabic)</label><textarea name="descriptionAr" dir="rtl">${escapeHTML(v('descriptionAr'))}</textarea></div>
+<div class="form-group"><label>المميزات (Features Arabic, comma separated)</label><input name="featuresAr" value="${escapeHTML((v('featuresAr',[])).join(', '))}" dir="rtl"></div>
 <div class="form-row"><div class="form-group"><label>Order</label><input type="number" name="order" value="${v('order',0)}"></div>
 <div class="form-group"><label class="form-check"><input type="checkbox" name="isActive" ${chk('isActive')}> Active</label></div></div>
 <div class="form-actions"><button type="submit" class="btn-dash-primary"><i data-lucide="save"></i><span>Save</span></button></div></form>`;
 if(type==='skills')return`<form>
-<div class="form-group"><label>Name</label><input name="name" value="${v('name')}" required></div>
-<div class="form-group"><label>Category</label><input name="category" value="${v('category')}"></div>
+<div class="form-group"><label>Name (English)</label><input name="name" value="${escapeHTML(v('name'))}" required></div>
+<div class="form-group"><label>Category (English)</label><input name="category" value="${escapeHTML(v('category'))}"></div>
 <div class="form-row"><div class="form-group"><label>Icon Type</label><select name="iconType"><option value="icon" ${v('iconType')==='icon'?'selected':''}>Lucide Icon</option><option value="image" ${v('iconType')==='image'?'selected':''}>Image URL</option></select></div>
-<div class="form-group"><label>Icon Value</label><input name="iconValue" value="${v('iconValue')}"><span class="helper-text">Lucide name or image URL</span></div></div>
+<div class="form-group"><label>Icon Value</label><input name="iconValue" value="${escapeHTML(v('iconValue'))}"><span class="helper-text">Lucide name or image URL</span></div></div>
 <div class="form-row"><div class="form-group"><label>Level (0-100)</label><input type="number" name="level" min="0" max="100" value="${v('level',0)}"></div>
 <div class="form-group"><label>Order</label><input type="number" name="order" value="${v('order',0)}"></div></div>
+${arSection()}
+<div class="form-group"><label>الاسم (Name Arabic)</label><input name="nameAr" value="${escapeHTML(v('nameAr'))}" dir="rtl"></div>
+<div class="form-group"><label>التصنيف (Category Arabic)</label><input name="categoryAr" value="${escapeHTML(v('categoryAr'))}" dir="rtl"></div>
 <div class="form-group"><label class="form-check"><input type="checkbox" name="isActive" ${chk('isActive')}> Active</label></div>
 <div class="form-actions"><button type="submit" class="btn-dash-primary"><i data-lucide="save"></i><span>Save</span></button></div></form>`;
 if(type==='experience')return`<form>
-<div class="form-group"><label>Role</label><input name="role" value="${v('role')}" required></div>
-<div class="form-row"><div class="form-group"><label>Company</label><input name="company" value="${v('company')}"></div>
-<div class="form-group"><label>Date</label><input name="date" value="${v('date')}" placeholder="Jan 2026 - Present"></div></div>
-<div class="form-group"><label>Details (one per line)</label><textarea name="details">${(v('details',[])).join('\n')}</textarea></div>
-<div class="form-group"><label>Tags (comma separated)</label><input name="tags" value="${(v('tags',[])).join(', ')}"></div>
+<div class="form-group"><label>Role (English)</label><input name="role" value="${escapeHTML(v('role'))}" required></div>
+<div class="form-row"><div class="form-group"><label>Company (English)</label><input name="company" value="${escapeHTML(v('company'))}"></div>
+<div class="form-group"><label>Date (English)</label><input name="date" value="${escapeHTML(v('date'))}" placeholder="Jan 2026 - Present"></div></div>
+<div class="form-group"><label>Description (English)</label><textarea name="description">${escapeHTML(v('description'))}</textarea></div>
+<div class="form-group"><label>Tags (comma separated)</label><input name="tags" value="${escapeHTML((v('tags',[])).join(', '))}"></div>
+${arSection()}
+<div class="form-group"><label>المسمى الوظيفي (Role Arabic)</label><input name="roleAr" value="${escapeHTML(v('roleAr'))}" dir="rtl"></div>
+<div class="form-row"><div class="form-group"><label>الشركة (Company Arabic)</label><input name="companyAr" value="${escapeHTML(v('companyAr'))}" dir="rtl"></div>
+<div class="form-group"><label>التاريخ (Date Arabic)</label><input name="dateAr" value="${escapeHTML(v('dateAr'))}" dir="rtl" placeholder="يناير 2026 - حتى الآن"></div></div>
+<div class="form-group"><label>الوصف (Description Arabic)</label><textarea name="descriptionAr" dir="rtl">${escapeHTML(v('descriptionAr'))}</textarea></div>
 <div class="form-row"><div class="form-group"><label>Order</label><input type="number" name="order" value="${v('order',0)}"></div>
 <div class="form-group"><label class="form-check"><input type="checkbox" name="isActive" ${chk('isActive')}> Active</label></div></div>
 <div class="form-actions"><button type="submit" class="btn-dash-primary"><i data-lucide="save"></i><span>Save</span></button></div></form>`;
 if(type==='certificates')return`<form>
-<div class="form-group"><label>Title</label><input name="title" value="${v('title')}" required></div>
-<div class="form-row"><div class="form-group"><label>Issuer</label><input name="issuer" value="${v('issuer')}"></div>
-<div class="form-group"><label>Issue Date</label><input name="issueDate" value="${v('issueDate')}"></div></div>
-<div class="form-group"><label>Credential ID</label><input name="credentialId" value="${v('credentialId')}"></div>
+<div class="form-group"><label>Title (English)</label><input name="title" value="${escapeHTML(v('title'))}" required></div>
+<div class="form-row"><div class="form-group"><label>Issuer (English)</label><input name="issuer" value="${escapeHTML(v('issuer'))}"></div>
+<div class="form-group"><label>Issue Date</label><input name="issueDate" value="${escapeHTML(v('issueDate'))}"></div></div>
+<div class="form-group"><label>Credential ID</label><input name="credentialId" value="${escapeHTML(v('credentialId'))}"></div>
 ${renderImageUploadField('Image',v('imageUrl'))}
-<div class="form-group"><label>Verify URL</label><input name="verifyUrl" value="${v('verifyUrl')}"></div>
+<div class="form-group"><label>Verify URL</label><input name="verifyUrl" value="${escapeHTML(v('verifyUrl'))}"></div>
+${arSection()}
+<div class="form-group"><label>العنوان (Title Arabic)</label><input name="titleAr" value="${escapeHTML(v('titleAr'))}" dir="rtl"></div>
+<div class="form-group"><label>الجهة المانحة (Issuer Arabic)</label><input name="issuerAr" value="${escapeHTML(v('issuerAr'))}" dir="rtl"></div>
 <div class="form-row"><div class="form-group"><label>Order</label><input type="number" name="order" value="${v('order',0)}"></div>
 <div class="form-group"><label class="form-check"><input type="checkbox" name="isActive" ${chk('isActive')}> Active</label></div></div>
 <div class="form-actions"><button type="submit" class="btn-dash-primary"><i data-lucide="save"></i><span>Save</span></button></div></form>`;
 if(type==='education')return`<form>
-<div class="form-group"><label>Title / Degree</label><input name="title" value="${v('title')}" required></div>
-<div class="form-row"><div class="form-group"><label>Institution</label><input name="institution" value="${v('institution')}"></div>
-<div class="form-group"><label>Date</label><input name="date" value="${v('date')}" placeholder="Aug 2022 - Expected Jul 2026"></div></div>
-<div class="form-group"><label>Description</label><textarea name="description">${v('description')}</textarea></div>
-<div class="form-group"><label>Highlights (comma separated)</label><input name="highlights" value="${(v('highlights',[])).join(', ')}"></div>
-<div class="form-group"><label>Icon (Lucide name)</label><input name="icon" value="${v('icon','graduation-cap')}"></div>
+<div class="form-group"><label>Title / Degree (English)</label><input name="title" value="${escapeHTML(v('title'))}" required></div>
+<div class="form-row"><div class="form-group"><label>Institution (English)</label><input name="institution" value="${escapeHTML(v('institution'))}"></div>
+<div class="form-group"><label>Date (English)</label><input name="date" value="${escapeHTML(v('date'))}" placeholder="Aug 2022 - Expected Jul 2026"></div></div>
+<div class="form-group"><label>Description (English)</label><textarea name="description">${escapeHTML(v('description'))}</textarea></div>
+<div class="form-group"><label>Highlights (comma separated)</label><input name="highlights" value="${escapeHTML((v('highlights',[])).join(', '))}"></div>
+<div class="form-group"><label>Icon (Lucide name)</label><input name="icon" value="${escapeHTML(v('icon','graduation-cap'))}"></div>
+${arSection()}
+<div class="form-group"><label>العنوان / الدرجة (Title Arabic)</label><input name="titleAr" value="${escapeHTML(v('titleAr'))}" dir="rtl"></div>
+<div class="form-row"><div class="form-group"><label>الجامعة (Institution Arabic)</label><input name="institutionAr" value="${escapeHTML(v('institutionAr'))}" dir="rtl"></div>
+<div class="form-group"><label>التاريخ (Date Arabic)</label><input name="dateAr" value="${escapeHTML(v('dateAr'))}" dir="rtl"></div></div>
+<div class="form-group"><label>الوصف (Description Arabic)</label><textarea name="descriptionAr" dir="rtl">${escapeHTML(v('descriptionAr'))}</textarea></div>
 <div class="form-row"><div class="form-group"><label>Order</label><input type="number" name="order" value="${v('order',0)}"></div>
 <div class="form-group"><label class="form-check"><input type="checkbox" name="isActive" ${chk('isActive')}> Active</label></div></div>
 <div class="form-actions"><button type="submit" class="btn-dash-primary"><i data-lucide="save"></i><span>Save</span></button></div></form>`;
 if(type==='projects')return`<form>
-<div class="form-group"><label>Title</label><input name="title" value="${v('title')}" required></div>
-<div class="form-group"><label>Description</label><textarea name="description">${v('description')}</textarea></div>
+<div class="form-group"><label>Title (English)</label><input name="title" value="${escapeHTML(v('title'))}" required></div>
+<div class="form-group"><label>Description (English)</label><textarea name="description">${escapeHTML(v('description'))}</textarea></div>
 ${renderImageUploadField('Project Image',v('imageUrl'))}
-<div class="form-row"><div class="form-group"><label>GitHub URL</label><input name="githubUrl" value="${v('githubUrl')}"></div>
-<div class="form-group"><label>Live URL</label><input name="liveUrl" value="${v('liveUrl')}"></div></div>
-<div class="form-group"><label>Tags (comma separated)</label><input name="tags" value="${(v('tags',[])).join(', ')}"></div>
-<div class="form-group"><label>Features (comma separated)</label><input name="features" value="${(v('features',[])).join(', ')}"></div>
+<div class="form-row"><div class="form-group"><label>GitHub URL</label><input name="githubUrl" value="${escapeHTML(v('githubUrl'))}"></div>
+<div class="form-group"><label>Live URL</label><input name="liveUrl" value="${escapeHTML(v('liveUrl'))}"></div></div>
+<div class="form-group"><label>Tags (comma separated)</label><input name="tags" value="${escapeHTML((v('tags',[])).join(', '))}"></div>
+<div class="form-group"><label>Features (English, comma separated)</label><input name="features" value="${escapeHTML((v('features',[])).join(', '))}"></div>
+<div class="form-group"><label>Date (English)</label><input name="date" value="${escapeHTML(v('date'))}" placeholder="Jan 2026"></div>
+${arSection()}
+<div class="form-group"><label>العنوان (Title Arabic)</label><input name="titleAr" value="${escapeHTML(v('titleAr'))}" dir="rtl"></div>
+<div class="form-group"><label>الوصف (Description Arabic)</label><textarea name="descriptionAr" dir="rtl">${escapeHTML(v('descriptionAr'))}</textarea></div>
+<div class="form-group"><label>المميزات (Features Arabic, comma separated)</label><input name="featuresAr" value="${escapeHTML((v('featuresAr',[])).join(', '))}" dir="rtl"></div>
+<div class="form-group"><label>التاريخ (Date Arabic)</label><input name="dateAr" value="${escapeHTML(v('dateAr'))}" dir="rtl" placeholder="يناير 2026"></div>
 <div class="form-row"><div class="form-group"><label>Order</label><input type="number" name="order" value="${v('order',0)}"></div>
 <div class="form-group"><div class="form-check" style="margin-top:24px"><input type="checkbox" name="isFeatured" ${chk('isFeatured')}><label>Featured</label></div>
 <div class="form-check"><input type="checkbox" name="isActive" ${chk('isActive')}><label>Active</label></div></div></div>
@@ -417,12 +448,12 @@ const num=k=>parseInt(fd.get(k))||0;
 const bool=k=>form.querySelector(`[name="${k}"]`)?.checked||false;
 const arr=k=>(fd.get(k)||'').split(',').map(s=>s.trim()).filter(Boolean);
 const lines=k=>(fd.get(k)||'').split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
-if(type==='services')return{title:str('title'),category:str('category'),description:str('description'),icon:str('icon'),features:arr('features'),priceMin:num('priceMin'),priceMax:num('priceMax'),order:num('order'),isActive:bool('isActive')};
-if(type==='skills')return{name:str('name'),category:str('category'),iconType:str('iconType'),iconValue:str('iconValue'),level:num('level'),order:num('order'),isActive:bool('isActive')};
-if(type==='experience')return{role:str('role'),company:str('company'),date:str('date'),details:lines('details'),tags:arr('tags'),order:num('order'),isActive:bool('isActive')};
-if(type==='certificates')return{title:str('title'),issuer:str('issuer'),issueDate:str('issueDate'),credentialId:str('credentialId'),imageUrl:str('imageUrl'),verifyUrl:str('verifyUrl'),order:num('order'),isActive:bool('isActive')};
-if(type==='education')return{title:str('title'),institution:str('institution'),date:str('date'),description:str('description'),highlights:arr('highlights'),icon:str('icon')||'graduation-cap',order:num('order'),isActive:bool('isActive')};
-if(type==='projects')return{title:str('title'),description:str('description'),imageUrl:str('imageUrl'),githubUrl:str('githubUrl'),liveUrl:str('liveUrl'),tags:arr('tags'),features:arr('features'),order:num('order'),isActive:bool('isActive'),isFeatured:bool('isFeatured')};
+if(type==='services')return{title:str('title'),titleAr:str('titleAr'),category:str('category'),categoryAr:str('categoryAr'),description:str('description'),descriptionAr:str('descriptionAr'),icon:str('icon'),features:arr('features'),featuresAr:arr('featuresAr'),priceMin:num('priceMin'),priceMax:num('priceMax'),order:num('order'),isActive:bool('isActive')};
+if(type==='skills')return{name:str('name'),nameAr:str('nameAr'),category:str('category'),categoryAr:str('categoryAr'),iconType:str('iconType'),iconValue:str('iconValue'),level:num('level'),order:num('order'),isActive:bool('isActive')};
+if(type==='experience')return{role:str('role'),roleAr:str('roleAr'),company:str('company'),companyAr:str('companyAr'),date:str('date'),dateAr:str('dateAr'),description:str('description'),descriptionAr:str('descriptionAr'),tags:arr('tags'),order:num('order'),isActive:bool('isActive')};
+if(type==='certificates')return{title:str('title'),titleAr:str('titleAr'),issuer:str('issuer'),issuerAr:str('issuerAr'),issueDate:str('issueDate'),credentialId:str('credentialId'),imageUrl:str('imageUrl'),verifyUrl:str('verifyUrl'),order:num('order'),isActive:bool('isActive')};
+if(type==='education')return{title:str('title'),titleAr:str('titleAr'),institution:str('institution'),institutionAr:str('institutionAr'),date:str('date'),dateAr:str('dateAr'),description:str('description'),descriptionAr:str('descriptionAr'),highlights:arr('highlights'),icon:str('icon')||'graduation-cap',order:num('order'),isActive:bool('isActive')};
+if(type==='projects')return{title:str('title'),titleAr:str('titleAr'),description:str('description'),descriptionAr:str('descriptionAr'),imageUrl:str('imageUrl'),githubUrl:str('githubUrl'),liveUrl:str('liveUrl'),tags:arr('tags'),features:arr('features'),featuresAr:arr('featuresAr'),date:str('date'),dateAr:str('dateAr'),order:num('order'),isActive:bool('isActive'),isFeatured:bool('isFeatured')};
 return{};
 }
 

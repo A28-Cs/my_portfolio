@@ -200,6 +200,12 @@ html[dir="rtl"] .message-item.unread{border-left:none;border-right:3px solid var
 html[dir="rtl"] .toast{transform:translateX(-120%)}
 html[dir="rtl"] .toast.show{transform:translateX(0)}
 
+/* Arabic section divider in forms */
+.form-section-divider{margin:24px 0 16px;padding:12px 0;border-top:1px solid var(--border-color);display:flex;align-items:center;gap:12px}
+.form-section-divider::before,.form-section-divider::after{content:'';flex:1;height:1px;background:var(--border-color)}
+.form-section-divider span{font-size:.85rem;font-weight:600;color:var(--accent-secondary);white-space:nowrap;letter-spacing:.02em}
+.form-group input[dir="rtl"],.form-group textarea[dir="rtl"]{text-align:right;direction:rtl}
+
 /* Responsive */
 @media(max-width:900px){
     .dash-sidebar{transform:translateX(-100%)}
