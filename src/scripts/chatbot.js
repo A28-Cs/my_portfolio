@@ -43,6 +43,7 @@ const i18n = {
     welcome: "Hi! I'm Ahmed's AI assistant. Ask me about his projects, skills, services, or how to get in touch.",
     placeholder: 'Message AI Assistant…',
     error: "Sorry, I couldn't reach the AI right now. Please try again.",
+    rateLimit: "Too many requests — please wait a moment and try again.",
     suggestions: [
       'Tell me about your projects',
       'What services do you offer?',
@@ -57,6 +58,7 @@ const i18n = {
     welcome: 'مرحباً! أنا المساعد الذكي لأحمد. اسألني عن مشاريعه أو مهاراته أو خدماته أو كيفية التواصل معه.',
     placeholder: 'اكتب رسالتك للمساعد الذكي…',
     error: 'عذراً، تعذّر الاتصال بالمساعد الذكي. يرجى المحاولة مجدداً.',
+    rateLimit: 'طلبات كثيرة جداً — انتظر لحظة ثم حاول مجدداً.',
     suggestions: [
       'حدّثني عن مشاريعك',
       'ما الخدمات التي تقدّمها؟',
@@ -288,6 +290,7 @@ async function sendMessage(text) {
       }),
     });
 
+    if (res.status === 429) throw new Error('RATE_LIMIT');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data  = await res.json();
     const reply = data.choices?.[0]?.message?.content?.trim() || t('error');
@@ -298,7 +301,7 @@ async function sendMessage(text) {
   } catch (err) {
     console.error('[ai-chat]', err);
     removeTyping();
-    addMessage('assistant', t('error'));
+    addMessage('assistant', err.message === 'RATE_LIMIT' ? t('rateLimit') : t('error'));
   } finally {
     state.loading = false;
     if (input) input.focus();
