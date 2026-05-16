@@ -175,11 +175,19 @@ function escapeHTML(s) {
 }
 
 function formatBody(text) {
-  // Very light markdown: **bold**, line breaks, simple lists, links
   let html = escapeHTML(text);
+  // Markdown links [label](url) — internal links open in same tab, external in new tab
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label, url) => {
+    const isExternal = /^https?:\/\//.test(url);
+    const attrs = isExternal ? ' target="_blank" rel="noopener"' : '';
+    return `<a href="${url}"${attrs}>${label}</a>`;
+  });
+  // Bold **text**
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  // Bare URLs
+  html = html.replace(/(https?:\/\/[^\s<"]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+  // Line breaks
   html = html.replace(/\n/g, '<br>');
-  html = html.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
   return html;
 }
 
