@@ -293,20 +293,17 @@ async function sendMessage(text) {
       temperature: 0.7,
     });
 
-    let res = await fetch(ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: payload,
-    });
-
-    // One automatic retry after 5 s on rate-limit
-    if (res.status === 429) {
-      await new Promise(r => setTimeout(r, 5000));
+    // Try up to 4 times with exponential backoff on 429 (1.5s, 3s, 6s)
+    const delays = [0, 1500, 3000, 6000];
+    let res;
+    for (const d of delays) {
+      if (d) await new Promise(r => setTimeout(r, d));
       res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: payload,
       });
+      if (res.status !== 429) break;
     }
 
     if (res.status === 429) throw new Error('RATE_LIMIT');
