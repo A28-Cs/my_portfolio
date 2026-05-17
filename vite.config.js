@@ -10,6 +10,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
  *  (direct Anthropic API, recommended) or AGENTROUTER_API_KEY (CLI-only).
  */
 function chatProxyPlugin(env) {
+  // Stable per dev-server start — mirrors how real Claude Code holds one session ID
+  const sessionId = randomUUID();
+
   return {
     name: 'chat-proxy-dev',
     configureServer(server) {
@@ -58,7 +61,7 @@ function chatProxyPlugin(env) {
                   'x-stainless-package-version': '0.94.0',
                   'x-stainless-runtime': 'node',
                   'x-stainless-runtime-version': 'v22.0.0',
-                  'x-claude-code-session-id': randomUUID(),
+                  'x-claude-code-session-id': sessionId,
                 }
               : {
                   'Content-Type': 'application/json',
