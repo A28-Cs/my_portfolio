@@ -12,6 +12,9 @@ import { randomUUID } from 'crypto';
 
 const MODEL = 'claude-haiku-4-5-20251001';
 
+// Stable per server instance — AgentRouter rate-limits when session ID changes every request
+const SESSION_ID = randomUUID();
+
 /** Headers that make AgentRouter accept the request (matches what Claude Code sends) */
 function agentRouterHeaders(apiKey) {
   return {
@@ -28,7 +31,7 @@ function agentRouterHeaders(apiKey) {
     'x-stainless-package-version': '0.94.0',
     'x-stainless-runtime': 'node',
     'x-stainless-runtime-version': 'v22.0.0',
-    'x-claude-code-session-id': randomUUID(),
+    'x-claude-code-session-id': SESSION_ID,
   };
 }
 

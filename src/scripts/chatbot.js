@@ -77,7 +77,10 @@ const t = key => (i18n[getLang()] || i18n.en)[key] ?? i18n.en[key];
 const state = {
   history: [],          // { role, content }[]
   loading: false,
+  lastSent: 0,          // ms timestamp — enforces min gap between requests
 };
+
+const MIN_SEND_GAP_MS = 2000; // 2 s between messages to avoid AgentRouter rate-limit
 
 // ── DOM mount ─────────────────────────────────────────────────────────────
 function mount() {
@@ -265,6 +268,10 @@ async function sendMessage(text) {
   const value = text.trim();
   if (!value || state.loading) return;
 
+  const now = Date.now();
+  if (now - state.lastSent < MIN_SEND_GAP_MS) return;
+  state.lastSent = now;
+
   state.loading = true;
   state.history.push({ role: 'user', content: value });
   addMessage('user', value);
@@ -277,18 +284,30 @@ async function sendMessage(text) {
   showTyping();
 
   try {
-    const res = await fetch(ENDPOINT, {
+    const payload = JSON.stringify({
+      messages: [
+        { role: 'system', content: SYSTEM_PROMPT },
+        ...state.history,
+      ],
+      max_tokens: 512,
+      temperature: 0.7,
+    });
+
+    let res = await fetch(ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
-          ...state.history,
-        ],
-        max_tokens: 512,
-        temperature: 0.7,
-      }),
+      body: payload,
     });
+
+    // One automatic retry after 5 s on rate-limit
+    if (res.status === 429) {
+      await new Promise(r => setTimeout(r, 5000));
+      res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+      });
+    }
 
     if (res.status === 429) throw new Error('RATE_LIMIT');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
