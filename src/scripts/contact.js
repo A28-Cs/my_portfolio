@@ -30,6 +30,7 @@ async function handleSubmit(e) {
 
   const name    = form.querySelector('[name="name"]').value.trim();
   const email   = form.email.value.trim();
+  const phone   = form.phone.value.trim();
   const subject = form.subject.value.trim();
   const message = form.message.value.trim();
 
@@ -47,7 +48,7 @@ async function handleSubmit(e) {
 
   try {
     await addDoc(collection(db, 'messages'), {
-      name, email, subject, message,
+      name, email, phone, subject, message,
       createdAt: serverTimestamp(),
       isRead: false,
     });
