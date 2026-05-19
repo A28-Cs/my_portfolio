@@ -1,15 +1,15 @@
 /**
- * Vercel Serverless Function — AI chat proxy using Google Gemini.
+ * Vercel Serverless Function — AI chat proxy using Groq.
+ *
+ * Groq uses an OpenAI-compatible API format.
+ * Free tier: 30 requests/minute, 14,400 requests/day.
  *
  * Environment variables (set in Vercel dashboard → Settings → Environment Variables):
- *   - GEMINI_API_KEY → your Google AI Studio API key (required)
- *     Get one free at: https://aistudio.google.com/apikey
- *
- * Accepts the same request format as the frontend sends, translates to Gemini format,
- * and returns the response in the same shape the frontend expects.
+ *   - GROQ_API_KEY → your Groq API key (required)
+ *     Get one free at: https://console.groq.com/keys
  */
 
-const MODEL = 'gemini-2.0-flash';
+const MODEL = 'llama-3.3-70b-versatile';
 
 export default async function handler(req, res) {
   // CORS on every response
@@ -25,11 +25,11 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
 
   if (!apiKey) {
     return res.status(500).json({
-      error: 'No API key configured. Set GEMINI_API_KEY in environment variables.',
+      error: 'No API key configured. Set GROQ_API_KEY in environment variables.',
     });
   }
 
@@ -37,39 +37,18 @@ export default async function handler(req, res) {
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     const messages = body.messages || [];
 
-    // Extract system instruction
-    const systemMsg = messages.find(m => m.role === 'system')?.content || '';
-
-    // Convert chat messages to Gemini format
-    // Gemini uses "user" and "model" roles (not "assistant")
-    const geminiContents = messages
-      .filter(m => m.role !== 'system')
-      .map(m => ({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }],
-      }));
-
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`;
-
-    const geminiBody = {
-      contents: geminiContents,
-      generationConfig: {
-        temperature: typeof body.temperature === 'number' ? body.temperature : 0.7,
-        maxOutputTokens: Math.min(body.max_tokens || 512, 2048),
-      },
-    };
-
-    // Add system instruction if present
-    if (systemMsg) {
-      geminiBody.systemInstruction = {
-        parts: [{ text: systemMsg }],
-      };
-    }
-
-    const upstream = await fetch(url, {
+    const upstream = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(geminiBody),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: messages.map(m => ({ role: m.role, content: m.content })),
+        max_tokens: Math.min(body.max_tokens || 512, 2048),
+        temperature: typeof body.temperature === 'number' ? body.temperature : 0.7,
+      }),
     });
 
     const rawData = await upstream.text();
@@ -82,17 +61,11 @@ export default async function handler(req, res) {
       });
     }
 
-    if (upstream.ok && data.candidates && data.candidates.length > 0) {
-      const text = data.candidates[0].content?.parts
-        ?.map(p => p.text)
-        .join('\n') || '';
-
-      return res.status(200).json({
-        choices: [{ message: { role: 'assistant', content: text } }],
-      });
+    if (upstream.ok) {
+      // Groq returns standard OpenAI format — pass it through directly
+      return res.status(200).json(data);
     }
 
-    // Error from Gemini API
     const errMsg = data.error?.message || JSON.stringify(data);
     return res.status(upstream.status || 500).json({ error: errMsg });
   } catch (err) {

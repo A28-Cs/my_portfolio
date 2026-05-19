@@ -1,7 +1,7 @@
 /**
  * "Try Our AI Tool" — ChatGPT-style embedded chat section.
  * Mounts onto a static <section id="aiChatSection"> in the page.
- * Backend: /api/chat (Vercel serverless function that proxies Google Gemini).
+ * Backend: /api/chat (Vercel serverless function that proxies Groq).
  */
 
 const ENDPOINT = '/api/chat';
@@ -50,7 +50,7 @@ const i18n = {
       'What is your tech stack?',
       'How can I contact you?',
     ],
-    poweredBy: 'Powered by Gemini',
+    poweredBy: 'Powered by AI',
     you: 'You',
     assistant: 'AI Assistant',
   },
@@ -65,7 +65,7 @@ const i18n = {
       'ما هي تقنياتك المستخدمة�',
       'كيف يمكنني التواصل معك؟',
     ],
-    poweredBy: 'مدعوم بـ Gemini',
+    poweredBy: 'مدعوم بالذكاء الاصطناعي',
     you: 'أنت',
     assistant: 'المساعد الذكي',
   },

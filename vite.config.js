@@ -5,8 +5,8 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /** Vite plugin: emulate Vercel's /api/chat function during `npm run dev`.
- *  Uses GEMINI_API_KEY to call Google Gemini API.
- *  Get a free key at: https://aistudio.google.com/apikey
+ *  Uses GROQ_API_KEY to call Groq API (OpenAI-compatible).
+ *  Get a free key at: https://console.groq.com/keys
  */
 function chatProxyPlugin(env) {
   return {
@@ -18,12 +18,12 @@ function chatProxyPlugin(env) {
           return res.end(JSON.stringify({ error: 'Method not allowed' }));
         }
 
-        const apiKey = env.GEMINI_API_KEY;
+        const apiKey = env.GROQ_API_KEY;
 
         if (!apiKey) {
           res.statusCode = 500;
           return res.end(JSON.stringify({
-            error: 'No API key configured. Set GEMINI_API_KEY in .env',
+            error: 'No API key configured. Set GROQ_API_KEY in .env',
           }));
         }
 
@@ -33,37 +33,19 @@ function chatProxyPlugin(env) {
           try {
             const body = JSON.parse(raw || '{}');
             const messages = body.messages || [];
-            const systemMsg = messages.find(m => m.role === 'system')?.content || '';
 
-            // Convert to Gemini format
-            const geminiContents = messages
-              .filter(m => m.role !== 'system')
-              .map(m => ({
-                role: m.role === 'assistant' ? 'model' : 'user',
-                parts: [{ text: m.content }],
-              }));
-
-            const model = 'gemini-2.0-flash';
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-
-            const geminiBody = {
-              contents: geminiContents,
-              generationConfig: {
-                temperature: typeof body.temperature === 'number' ? body.temperature : 0.7,
-                maxOutputTokens: Math.min(body.max_tokens || 512, 2048),
-              },
-            };
-
-            if (systemMsg) {
-              geminiBody.systemInstruction = {
-                parts: [{ text: systemMsg }],
-              };
-            }
-
-            const upstream = await fetch(url, {
+            const upstream = await fetch('https://api.groq.com/openai/v1/chat/completions', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(geminiBody),
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`,
+              },
+              body: JSON.stringify({
+                model: 'llama-3.3-70b-versatile',
+                messages: messages.map(m => ({ role: m.role, content: m.content })),
+                max_tokens: Math.min(body.max_tokens || 512, 2048),
+                temperature: typeof body.temperature === 'number' ? body.temperature : 0.7,
+              }),
             });
 
             const rawData = await upstream.text();
@@ -76,15 +58,10 @@ function chatProxyPlugin(env) {
               return res.end(JSON.stringify({ error: rawData || `HTTP ${upstream.status}` }));
             }
 
-            if (upstream.ok && data.candidates && data.candidates.length > 0) {
-              const text = data.candidates[0].content?.parts
-                ?.map(p => p.text)
-                .join('\n') || '';
+            if (upstream.ok) {
               res.statusCode = 200;
               res.setHeader('Content-Type', 'application/json');
-              return res.end(JSON.stringify({
-                choices: [{ message: { role: 'assistant', content: text } }],
-              }));
+              return res.end(JSON.stringify(data));
             }
 
             const errMsg = data.error?.message || JSON.stringify(data);
