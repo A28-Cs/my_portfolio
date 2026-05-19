@@ -45,14 +45,32 @@ export default async function handler(req, res) {
       .map(m => ({ role: m.role, content: m.content }));
 
     const url = `${baseUrl}/v1/messages`;
+    const isAgentRouter = baseUrl.includes('agentrouter.org');
+    
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+    };
+    
+    if (isAgentRouter) {
+      Object.assign(headers, {
+        'anthropic-beta': 'claude-code-20250219,interleaved-thinking-2025-05-14',
+        'anthropic-dangerous-direct-browser-access': 'true',
+        'user-agent': 'claude-cli/2.1.143 (external, claude-desktop, agent-sdk/0.2.138)',
+        'x-app': 'cli',
+        'x-stainless-arch': 'x64',
+        'x-stainless-lang': 'js',
+        'x-stainless-os': 'Linux',
+        'x-stainless-package-version': '0.94.0',
+        'x-stainless-runtime': 'node',
+        'x-stainless-runtime-version': 'v22.0.0',
+      });
+    }
 
     const upstream = await fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
+      headers,
       body: JSON.stringify({
         model: MODEL,
         system: systemMsg,

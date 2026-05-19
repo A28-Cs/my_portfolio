@@ -307,7 +307,14 @@ async function sendMessage(text) {
     }
 
     if (res.status === 429) throw new Error('RATE_LIMIT');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    if (!res.ok) {
+      let errMsg = `HTTP ${res.status}`;
+      try {
+        const errData = await res.json();
+        errMsg = errData.error?.message || errData.error || errMsg;
+      } catch (e) {}
+      throw new Error(errMsg);
+    }
     const data  = await res.json();
     const reply = data.choices?.[0]?.message?.content?.trim() || t('error');
 
@@ -317,7 +324,9 @@ async function sendMessage(text) {
   } catch (err) {
     console.error('[ai-chat]', err);
     removeTyping();
-    addMessage('assistant', err.message === 'RATE_LIMIT' ? t('rateLimit') : t('error'));
+    const isRateLimit = err.message === 'RATE_LIMIT';
+    const displayMsg = isRateLimit ? t('rateLimit') : `Error: ${err.message}. Please check your API key in Vercel.`;
+    addMessage('assistant', displayMsg);
   } finally {
     state.loading = false;
     if (input) input.focus();
