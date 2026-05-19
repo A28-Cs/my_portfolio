@@ -1,18 +1,14 @@
 import { defineConfig, loadEnv } from 'vite';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { randomUUID } from 'crypto';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /** Vite plugin: emulate Vercel's /api/chat function during `npm run dev`.
- *  Mirrors the logic in api/chat.js — supports either ANTHROPIC_API_KEY
- *  (direct Anthropic API, recommended) or AGENTROUTER_API_KEY (CLI-only).
+ *  Uses ANTHROPIC_API_KEY + ANTHROPIC_BASE_URL (defaults to https://api.anthropic.com).
+ *  For AgentRouter, set ANTHROPIC_BASE_URL=https://agentrouter.org in .env.
  */
 function chatProxyPlugin(env) {
-  // Stable per dev-server start — mirrors how real Claude Code holds one session ID
-  const sessionId = randomUUID();
-
   return {
     name: 'chat-proxy-dev',
     configureServer(server) {
@@ -22,12 +18,13 @@ function chatProxyPlugin(env) {
           return res.end(JSON.stringify({ error: 'Method not allowed' }));
         }
 
-        const anthropicKey   = env.ANTHROPIC_API_KEY;
-        const agentRouterKey = env.AGENTROUTER_API_KEY;
-        if (!anthropicKey && !agentRouterKey) {
+        const apiKey  = env.ANTHROPIC_API_KEY;
+        const baseUrl = (env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com').replace(/\/+$/, '');
+
+        if (!apiKey) {
           res.statusCode = 500;
           return res.end(JSON.stringify({
-            error: 'No API key configured. Set ANTHROPIC_API_KEY or AGENTROUTER_API_KEY in .env',
+            error: 'No API key configured. Set ANTHROPIC_API_KEY in .env',
           }));
         }
 
@@ -42,36 +39,15 @@ function chatProxyPlugin(env) {
               .filter(m => m.role !== 'system')
               .map(m => ({ role: m.role, content: m.content }));
 
-            const useAgentRouter = !!agentRouterKey;
-            const url = useAgentRouter
-              ? 'https://agentrouter.org/v1/messages?beta=true'
-              : 'https://api.anthropic.com/v1/messages';
-            const headers = useAgentRouter
-              ? {
-                  'Content-Type': 'application/json',
-                  'x-api-key': agentRouterKey,
-                  'anthropic-version': '2023-06-01',
-                  'anthropic-beta': 'claude-code-20250219,interleaved-thinking-2025-05-14',
-                  'anthropic-dangerous-direct-browser-access': 'true',
-                  'user-agent': 'claude-cli/2.1.143 (external, claude-desktop, agent-sdk/0.2.138)',
-                  'x-app': 'cli',
-                  'x-stainless-arch': 'x64',
-                  'x-stainless-lang': 'js',
-                  'x-stainless-os': 'Linux',
-                  'x-stainless-package-version': '0.94.0',
-                  'x-stainless-runtime': 'node',
-                  'x-stainless-runtime-version': 'v22.0.0',
-                  'x-claude-code-session-id': sessionId,
-                }
-              : {
-                  'Content-Type': 'application/json',
-                  'x-api-key': anthropicKey,
-                  'anthropic-version': '2023-06-01',
-                };
+            const url = `${baseUrl}/v1/messages`;
 
             const upstream = await fetch(url, {
               method: 'POST',
-              headers,
+              headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': apiKey,
+                'anthropic-version': '2023-06-01',
+              },
               body: JSON.stringify({
                 model: 'claude-haiku-4-5-20251001',
                 system: systemMsg,

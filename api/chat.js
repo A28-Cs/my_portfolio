@@ -1,39 +1,19 @@
-import { randomUUID } from 'crypto';
-
 /**
  * Vercel Serverless Function — AI chat proxy.
  *
- * Priority order (first key found wins):
- *   1. AGENTROUTER_API_KEY → AgentRouter (free Claude access via claude-cli headers)
- *   2. ANTHROPIC_API_KEY   → Anthropic API directly
+ * Uses the standard Anthropic Messages API format.
+ * Compatible with both direct Anthropic and AgentRouter:
+ *   - ANTHROPIC_API_KEY   → your API key (required)
+ *   - ANTHROPIC_BASE_URL  → base URL (defaults to https://api.anthropic.com)
+ *
+ * For AgentRouter, set:
+ *   ANTHROPIC_BASE_URL=https://agentrouter.org
+ *   ANTHROPIC_API_KEY=sk-xxx  (your AgentRouter token)
  *
  * Set in Vercel dashboard → Settings → Environment Variables.
  */
 
 const MODEL = 'claude-haiku-4-5-20251001';
-
-// Stable per server instance — AgentRouter rate-limits when session ID changes every request
-const SESSION_ID = randomUUID();
-
-/** Headers that make AgentRouter accept the request (matches what Claude Code sends) */
-function agentRouterHeaders(apiKey) {
-  return {
-    'Content-Type': 'application/json',
-    'x-api-key': apiKey,
-    'anthropic-version': '2023-06-01',
-    'anthropic-beta': 'claude-code-20250219,interleaved-thinking-2025-05-14',
-    'anthropic-dangerous-direct-browser-access': 'true',
-    'user-agent': 'claude-cli/2.1.143 (external, claude-desktop, agent-sdk/0.2.138)',
-    'x-app': 'cli',
-    'x-stainless-arch': 'x64',
-    'x-stainless-lang': 'js',
-    'x-stainless-os': 'Linux',
-    'x-stainless-package-version': '0.94.0',
-    'x-stainless-runtime': 'node',
-    'x-stainless-runtime-version': 'v22.0.0',
-    'x-claude-code-session-id': SESSION_ID,
-  };
-}
 
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') {
@@ -47,12 +27,12 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const agentRouterKey = process.env.AGENTROUTER_API_KEY;
-  const anthropicKey   = process.env.ANTHROPIC_API_KEY;
+  const apiKey  = process.env.ANTHROPIC_API_KEY;
+  const baseUrl = (process.env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com').replace(/\/+$/, '');
 
-  if (!agentRouterKey && !anthropicKey) {
+  if (!apiKey) {
     return res.status(500).json({
-      error: 'No API key configured. Set AGENTROUTER_API_KEY or ANTHROPIC_API_KEY.',
+      error: 'No API key configured. Set ANTHROPIC_API_KEY in environment variables.',
     });
   }
 
@@ -64,17 +44,15 @@ export default async function handler(req, res) {
       .filter(m => m.role !== 'system')
       .map(m => ({ role: m.role, content: m.content }));
 
-    const useAgentRouter = !!agentRouterKey;
-    const url = useAgentRouter
-      ? 'https://agentrouter.org/v1/messages?beta=true'
-      : 'https://api.anthropic.com/v1/messages';
-    const headers = useAgentRouter
-      ? agentRouterHeaders(agentRouterKey)
-      : { 'Content-Type': 'application/json', 'x-api-key': anthropicKey, 'anthropic-version': '2023-06-01' };
+    const url = `${baseUrl}/v1/messages`;
 
     const upstream = await fetch(url, {
       method: 'POST',
-      headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+      },
       body: JSON.stringify({
         model: MODEL,
         system: systemMsg,
@@ -102,3 +80,4 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Upstream request failed' });
   }
 }
+
