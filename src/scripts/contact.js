@@ -49,7 +49,7 @@ async function handleSubmit(e) {
     await addDoc(collection(db, 'messages'), {
       name, email, subject, message,
       createdAt: serverTimestamp(),
-      read: false,
+      isRead: false,
     });
     showToast('Message sent! I\'ll get back to you soon.', 'success');
     form.reset();
