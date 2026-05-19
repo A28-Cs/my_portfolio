@@ -80,7 +80,14 @@ export default async function handler(req, res) {
       }),
     });
 
-    const data = await upstream.json();
+    const rawData = await upstream.text();
+    let data;
+    try {
+      data = JSON.parse(rawData);
+    } catch (e) {
+      // If it's not JSON, it might be a plain text error from AgentRouter (e.g. 'Unauthorized')
+      return res.status(upstream.status).json({ error: rawData || `HTTP ${upstream.status}` });
+    }
 
     if (upstream.ok && data.content) {
       const text = data.content
@@ -95,7 +102,7 @@ export default async function handler(req, res) {
     return res.status(upstream.status).json(data);
   } catch (err) {
     console.error('[api/chat]', err);
-    return res.status(500).json({ error: 'Upstream request failed' });
+    return res.status(500).json({ error: `Upstream request failed: ${err.message}` });
   }
 }
 

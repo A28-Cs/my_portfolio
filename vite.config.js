@@ -75,7 +75,15 @@ function chatProxyPlugin(env) {
               }),
             });
 
-            const data = await upstream.json();
+            const rawData = await upstream.text();
+            let data;
+            try {
+              data = JSON.parse(rawData);
+            } catch (e) {
+              res.statusCode = upstream.status;
+              res.setHeader('Content-Type', 'application/json');
+              return res.end(JSON.stringify({ error: rawData || `HTTP ${upstream.status}` }));
+            }
 
             if (upstream.ok && data.content) {
               const text = data.content
@@ -95,7 +103,7 @@ function chatProxyPlugin(env) {
           } catch (err) {
             console.error('[chat-proxy-dev]', err);
             res.statusCode = 500;
-            res.end(JSON.stringify({ error: 'Upstream request failed' }));
+            res.end(JSON.stringify({ error: `Upstream request failed: ${err.message}` }));
           }
         });
       });
