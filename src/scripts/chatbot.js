@@ -1,7 +1,7 @@
 /**
  * "Try Our AI Tool" — ChatGPT-style embedded chat section.
  * Mounts onto a static <section id="aiChatSection"> in the page.
- * Backend: /api/chat (Vercel serverless function that proxies AgentRouter).
+ * Backend: /api/chat (Vercel serverless function that proxies Google Gemini).
  */
 
 const ENDPOINT = '/api/chat';
@@ -50,7 +50,7 @@ const i18n = {
       'What is your tech stack?',
       'How can I contact you?',
     ],
-    poweredBy: 'Powered by Claude · via AgentRouter',
+    poweredBy: 'Powered by Gemini',
     you: 'You',
     assistant: 'AI Assistant',
   },
@@ -65,7 +65,7 @@ const i18n = {
       'ما هي تقنياتك المستخدمة�',
       'كيف يمكنني التواصل معك؟',
     ],
-    poweredBy: 'مدعوم بـ Claude · عبر AgentRouter',
+    poweredBy: 'مدعوم بـ Gemini',
     you: 'أنت',
     assistant: 'المساعد الذكي',
   },
@@ -80,7 +80,7 @@ const state = {
   lastSent: 0,          // ms timestamp — enforces min gap between requests
 };
 
-const MIN_SEND_GAP_MS = 2000; // 2 s between messages to avoid AgentRouter rate-limit
+const MIN_SEND_GAP_MS = 2000; // 2 s between messages to avoid rate-limit
 
 // ── DOM mount ─────────────────────────────────────────────────────────────
 function mount() {
@@ -325,7 +325,7 @@ async function sendMessage(text) {
     console.error('[ai-chat]', err);
     removeTyping();
     const isRateLimit = err.message === 'RATE_LIMIT';
-    const displayMsg = isRateLimit ? t('rateLimit') : `Error: ${err.message}. Please check your API key in Vercel.`;
+    const displayMsg = isRateLimit ? t('rateLimit') : t('error');
     addMessage('assistant', displayMsg);
   } finally {
     state.loading = false;

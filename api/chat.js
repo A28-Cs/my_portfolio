@@ -1,22 +1,18 @@
 /**
- * Vercel Serverless Function — AI chat proxy.
+ * Vercel Serverless Function — AI chat proxy using Google Gemini.
  *
- * Uses the standard Anthropic Messages API format.
- * Compatible with both direct Anthropic and AgentRouter:
- *   - ANTHROPIC_API_KEY   → your API key (required)
- *   - ANTHROPIC_BASE_URL  → base URL (defaults to https://api.anthropic.com)
+ * Environment variables (set in Vercel dashboard → Settings → Environment Variables):
+ *   - GEMINI_API_KEY → your Google AI Studio API key (required)
+ *     Get one free at: https://aistudio.google.com/apikey
  *
- * For AgentRouter, set:
- *   ANTHROPIC_BASE_URL=https://agentrouter.org
- *   ANTHROPIC_API_KEY=sk-xxx  (your AgentRouter token)
- *
- * Set in Vercel dashboard → Settings → Environment Variables.
+ * Accepts the same request format as the frontend sends, translates to Gemini format,
+ * and returns the response in the same shape the frontend expects.
  */
 
-const MODEL = 'claude-haiku-4-5-20251001';
+const MODEL = 'gemini-2.0-flash';
 
 export default async function handler(req, res) {
-  // CORS
+  // CORS on every response
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -29,57 +25,51 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const apiKey  = process.env.ANTHROPIC_API_KEY;
-  const baseUrl = (process.env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com').replace(/\/+$/, '');
+  const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
     return res.status(500).json({
-      error: 'No API key configured. Set ANTHROPIC_API_KEY in environment variables.',
+      error: 'No API key configured. Set GEMINI_API_KEY in environment variables.',
     });
   }
 
   try {
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     const messages = body.messages || [];
-    const systemMsg = messages.find(m => m.role === 'system')?.content || '';
-    const userMessages = messages
-      .filter(m => m.role !== 'system')
-      .map(m => ({ role: m.role, content: m.content }));
 
-    const url = `${baseUrl}/v1/messages`;
-    const isAgentRouter = baseUrl.includes('agentrouter.org');
-    
-    const headers = {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
+    // Extract system instruction
+    const systemMsg = messages.find(m => m.role === 'system')?.content || '';
+
+    // Convert chat messages to Gemini format
+    // Gemini uses "user" and "model" roles (not "assistant")
+    const geminiContents = messages
+      .filter(m => m.role !== 'system')
+      .map(m => ({
+        role: m.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: m.content }],
+      }));
+
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`;
+
+    const geminiBody = {
+      contents: geminiContents,
+      generationConfig: {
+        temperature: typeof body.temperature === 'number' ? body.temperature : 0.7,
+        maxOutputTokens: Math.min(body.max_tokens || 512, 2048),
+      },
     };
-    
-    if (isAgentRouter) {
-      Object.assign(headers, {
-        'anthropic-beta': 'claude-code-20250219,interleaved-thinking-2025-05-14',
-        'anthropic-dangerous-direct-browser-access': 'true',
-        'user-agent': 'claude-cli/2.1.143 (external, claude-desktop, agent-sdk/0.2.138)',
-        'x-app': 'cli',
-        'x-stainless-arch': 'x64',
-        'x-stainless-lang': 'js',
-        'x-stainless-os': 'Linux',
-        'x-stainless-package-version': '0.94.0',
-        'x-stainless-runtime': 'node',
-        'x-stainless-runtime-version': 'v22.0.0',
-      });
+
+    // Add system instruction if present
+    if (systemMsg) {
+      geminiBody.systemInstruction = {
+        parts: [{ text: systemMsg }],
+      };
     }
 
     const upstream = await fetch(url, {
       method: 'POST',
-      headers,
-      body: JSON.stringify({
-        model: MODEL,
-        system: systemMsg,
-        messages: userMessages,
-        max_tokens: Math.min(body.max_tokens || 512, 1024),
-        temperature: typeof body.temperature === 'number' ? body.temperature : 0.7,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(geminiBody),
     });
 
     const rawData = await upstream.text();
@@ -87,20 +77,24 @@ export default async function handler(req, res) {
     try {
       data = JSON.parse(rawData);
     } catch (e) {
-      return res.status(upstream.status).json({ error: rawData || `HTTP ${upstream.status}` });
+      return res.status(upstream.status).json({
+        error: rawData || `HTTP ${upstream.status}`,
+      });
     }
 
-    if (upstream.ok && data.content) {
-      const text = data.content
-        .filter(b => b.type === 'text')
-        .map(b => b.text)
-        .join('\n');
+    if (upstream.ok && data.candidates && data.candidates.length > 0) {
+      const text = data.candidates[0].content?.parts
+        ?.map(p => p.text)
+        .join('\n') || '';
+
       return res.status(200).json({
         choices: [{ message: { role: 'assistant', content: text } }],
       });
     }
 
-    return res.status(upstream.status).json(data);
+    // Error from Gemini API
+    const errMsg = data.error?.message || JSON.stringify(data);
+    return res.status(upstream.status || 500).json({ error: errMsg });
   } catch (err) {
     console.error('[api/chat]', err);
     return res.status(500).json({ error: `Upstream request failed: ${err.message}` });

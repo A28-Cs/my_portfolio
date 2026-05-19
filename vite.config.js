@@ -5,8 +5,8 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /** Vite plugin: emulate Vercel's /api/chat function during `npm run dev`.
- *  Uses ANTHROPIC_API_KEY + ANTHROPIC_BASE_URL (defaults to https://api.anthropic.com).
- *  For AgentRouter, set ANTHROPIC_BASE_URL=https://agentrouter.org in .env.
+ *  Uses GEMINI_API_KEY to call Google Gemini API.
+ *  Get a free key at: https://aistudio.google.com/apikey
  */
 function chatProxyPlugin(env) {
   return {
@@ -18,13 +18,12 @@ function chatProxyPlugin(env) {
           return res.end(JSON.stringify({ error: 'Method not allowed' }));
         }
 
-        const apiKey  = env.ANTHROPIC_API_KEY;
-        const baseUrl = (env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com').replace(/\/+$/, '');
+        const apiKey = env.GEMINI_API_KEY;
 
         if (!apiKey) {
           res.statusCode = 500;
           return res.end(JSON.stringify({
-            error: 'No API key configured. Set ANTHROPIC_API_KEY in .env',
+            error: 'No API key configured. Set GEMINI_API_KEY in .env',
           }));
         }
 
@@ -35,44 +34,36 @@ function chatProxyPlugin(env) {
             const body = JSON.parse(raw || '{}');
             const messages = body.messages || [];
             const systemMsg = messages.find(m => m.role === 'system')?.content || '';
-            const userMessages = messages
-              .filter(m => m.role !== 'system')
-              .map(m => ({ role: m.role, content: m.content }));
 
-            const url = `${baseUrl}/v1/messages`;
-            const isAgentRouter = baseUrl.includes('agentrouter.org');
-            
-            const headers = {
-              'Content-Type': 'application/json',
-              'x-api-key': apiKey,
-              'anthropic-version': '2023-06-01',
+            // Convert to Gemini format
+            const geminiContents = messages
+              .filter(m => m.role !== 'system')
+              .map(m => ({
+                role: m.role === 'assistant' ? 'model' : 'user',
+                parts: [{ text: m.content }],
+              }));
+
+            const model = 'gemini-2.0-flash';
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+
+            const geminiBody = {
+              contents: geminiContents,
+              generationConfig: {
+                temperature: typeof body.temperature === 'number' ? body.temperature : 0.7,
+                maxOutputTokens: Math.min(body.max_tokens || 512, 2048),
+              },
             };
-            
-            if (isAgentRouter) {
-              Object.assign(headers, {
-                'anthropic-beta': 'claude-code-20250219,interleaved-thinking-2025-05-14',
-                'anthropic-dangerous-direct-browser-access': 'true',
-                'user-agent': 'claude-cli/2.1.143 (external, claude-desktop, agent-sdk/0.2.138)',
-                'x-app': 'cli',
-                'x-stainless-arch': 'x64',
-                'x-stainless-lang': 'js',
-                'x-stainless-os': 'Linux',
-                'x-stainless-package-version': '0.94.0',
-                'x-stainless-runtime': 'node',
-                'x-stainless-runtime-version': 'v22.0.0',
-              });
+
+            if (systemMsg) {
+              geminiBody.systemInstruction = {
+                parts: [{ text: systemMsg }],
+              };
             }
 
             const upstream = await fetch(url, {
               method: 'POST',
-              headers,
-              body: JSON.stringify({
-                model: 'claude-haiku-4-5-20251001',
-                system: systemMsg,
-                messages: userMessages,
-                max_tokens: Math.min(body.max_tokens || 512, 1024),
-                temperature: typeof body.temperature === 'number' ? body.temperature : 0.7,
-              }),
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(geminiBody),
             });
 
             const rawData = await upstream.text();
@@ -85,11 +76,10 @@ function chatProxyPlugin(env) {
               return res.end(JSON.stringify({ error: rawData || `HTTP ${upstream.status}` }));
             }
 
-            if (upstream.ok && data.content) {
-              const text = data.content
-                .filter(b => b.type === 'text')
-                .map(b => b.text)
-                .join('\n');
+            if (upstream.ok && data.candidates && data.candidates.length > 0) {
+              const text = data.candidates[0].content?.parts
+                ?.map(p => p.text)
+                .join('\n') || '';
               res.statusCode = 200;
               res.setHeader('Content-Type', 'application/json');
               return res.end(JSON.stringify({
@@ -97,9 +87,10 @@ function chatProxyPlugin(env) {
               }));
             }
 
-            res.statusCode = upstream.status;
+            const errMsg = data.error?.message || JSON.stringify(data);
+            res.statusCode = upstream.status || 500;
             res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify(data));
+            res.end(JSON.stringify({ error: errMsg }));
           } catch (err) {
             console.error('[chat-proxy-dev]', err);
             res.statusCode = 500;
