@@ -16,10 +16,12 @@
 const MODEL = 'claude-haiku-4-5-20251001';
 
 export default async function handler(req, res) {
+  // CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   if (req.method === 'OPTIONS') {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     return res.status(204).end();
   }
 
@@ -85,7 +87,6 @@ export default async function handler(req, res) {
     try {
       data = JSON.parse(rawData);
     } catch (e) {
-      // If it's not JSON, it might be a plain text error from AgentRouter (e.g. 'Unauthorized')
       return res.status(upstream.status).json({ error: rawData || `HTTP ${upstream.status}` });
     }
 
@@ -105,4 +106,3 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: `Upstream request failed: ${err.message}` });
   }
 }
-
